@@ -17,11 +17,10 @@ const get = (endpoint, param) =>
       console.log(networkError);
     });
 
-export const getBrandsByName = brand => {
-  return get(brandEndpoint, brand)
-    .then(returnedString => {
-      return JSON.parse(returnedString)
-    })
-};
+export const getBrandsByName =
+  brand =>
+    get(brandEndpoint, brand)
+      .then(returnedString => JSON.parse(returnedString));
+
 
 export const getBrandsByCity = city => get(cityEndpoint, city);

@@ -20,7 +20,7 @@ describe('App', () => {
     input.simulate('change', { target: { value: brands[1] } });
 
     return waitForSample(app)
-      .then((app) => {
+      .then(() => {
         const results = app.find('#searchResults');
         expect(results.text()).to.include('Brand 1');
         expect(results.text()).to.include('Brand 2');
