@@ -12,7 +12,7 @@ describe('App', () => {
 
   it('should GET by brand and display on page', () => {
     const waitForSample = createWaitForElement('#searchResults');
-    const brands = ["Brand 1", "Brand 2"];
+    const brands = ['Brand 1', 'Brand 2'];
     fetchMock.get('*', brands);
     const app = mount(<App />);
     const input = app.find({ name: 'brandInput' });
@@ -20,7 +20,7 @@ describe('App', () => {
     input.simulate('change', { target: { value: brands[1] } });
 
     return waitForSample(app)
-      .then( app => {
+      .then((app) => {
         const results = app.find('#searchResults');
         expect(results.text()).to.include('Brand 1');
         expect(results.text()).to.include('Brand 2');

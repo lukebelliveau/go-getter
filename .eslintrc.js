@@ -30,6 +30,8 @@ module.exports = {
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "react/jsx-curly-spacing": "off",
+    "react/prop-types": "off"
   }
 };
