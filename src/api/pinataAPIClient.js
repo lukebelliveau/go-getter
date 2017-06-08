@@ -14,19 +14,13 @@ const handleErrors = (response) => {
   return response;
 };
 
-export const getBrandsByName = brand =>
-  fetch(`${brandEndpoint}?search=${brand}`)
+const get = (endpoint, param) =>
+  fetch(`${endpoint}?search=${param}`)
     .then(handleErrors)
     .then(response => response.text())
     .catch((networkError) => {
       console.log(networkError);
     });
 
-export const getBrandsByCity = city =>
-  fetch(`${cityEndpoint}?search=${city}`)
-    .then(handleErrors)
-    .then(response => response.text())
-    .catch((networkError) => {
-      console.log(networkError);
-    });
-
+export const getBrandsByName = brand => get(brandEndpoint, brand);
+export const getBrandsByCity = city => get(cityEndpoint, city);
