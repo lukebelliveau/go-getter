@@ -2,7 +2,7 @@ const path = require('path');
 module.exports = {
   entry: [
     'whatwg-fetch',
-    './src/App.jsx',
+    './entry.jsx',
   ],
   output: {
     path: path.resolve('dist'),

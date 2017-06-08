@@ -1,8 +1,3 @@
-// IE10 Promise compatibility
-import Promise from 'promise-polyfill';
-// To add to window
-if (!window.Promise) window.Promise = Promise;
-
 const url = 'https://us-central1-pinata-1470075080669.cloudfunctions.net';
 const brandEndpoint = `${url}/brands`;
 const cityEndpoint = `${url}/cities`;
