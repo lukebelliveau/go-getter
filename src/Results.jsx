@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress, RaisedButton } from 'material-ui';
 import { LOADING_RESULTS } from './App';
 
 const ResultsContainer = ({ results }) => (
@@ -15,9 +15,11 @@ const ResultsContainer = ({ results }) => (
 );
 
 const Result = ({ brandName }) => (
-  <div>
-    { brandName }
-  </div>
+  <RaisedButton style={{ margin: 10 }}>
+    <div style={{ padding: 10 }}>
+      { brandName }
+    </div>
+  </RaisedButton>
 );
 
 export default ResultsContainer;
