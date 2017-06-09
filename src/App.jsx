@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { TextField } from 'material-ui';
+import { TextField, Dialog, FlatButton } from 'material-ui';
 
 import ResultsComponent from './Results';
 import { getBrandsByName } from './api/pinataAPIClient';
@@ -16,9 +16,13 @@ class App extends Component {
     this.state = {
       brandInput: '',
       results: {},
+      showBrandDialog: false,
     };
 
     this.brandChanged = this.brandChanged.bind(this);
+    this.brandClicked = this.brandClicked.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
+    this.confirmBrand = this.confirmBrand.bind(this);
   }
 
   brandChanged(event) {
@@ -36,6 +40,22 @@ class App extends Component {
       });
   }
 
+  brandClicked(brand) {
+    this.setState(() => ({
+      showBrandDialog: true,
+    }))
+  }
+
+  closeDialog() {
+    this.setState(() => ({
+      showBrandDialog: false,
+    }))
+  }
+
+  confirmBrand() {
+    console.log('confirming brand!');
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -43,12 +63,33 @@ class App extends Component {
           <SearchBar
             brand={{ value: this.state.brandInput, onChange: this.brandChanged }}
           />
-          <ResultsComponent results={ this.state.results } />
+          <ResultsComponent results={ this.state.results } onClick={ this.brandClicked }/>
+          <BrandDialog open={ this.state.showBrandDialog } submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
         </div>
       </MuiThemeProvider>
     );
   }
 }
+
+const BrandDialog = ({ open, submit, closeDialog }) => {
+  const actions = [
+    <FlatButton
+      label="Cancel"
+      primary={true}
+      onTouchTap={ closeDialog }
+    />,
+    <FlatButton
+      label="Submit"
+      primary={true}
+      keyboardFocused={true}
+      onTouchTap={ submit }
+    />,
+  ];
+
+  return (
+    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" />
+  )
+};
 
 const SearchBar = ({ brand }) => (
   <div style={ centerFlex }>

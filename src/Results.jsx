@@ -7,35 +7,46 @@ import styles from './styles';
 
 const { centerFlex } = styles;
 
-const ResultsContainer = ({ results }) => (
+const ResultsContainer = ({ results, onClick }) => (
   <div name="results" style={ centerFlex }>
     {
       results === LOADING_RESULTS
         ? <CircularProgress />
         : <div id="searchResults">
         <MediaQuery minDeviceWidth={ mobileWidth }>
-          <ResultList results={ results } style={ desktopStyle }/>
+          <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
         </MediaQuery>
         <MediaQuery maxDeviceWidth={ mobileWidth }>
-          <ResultList results={ results } style={ mobileStyle }/>
+          <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>
         </MediaQuery>
       </div>
     }
   </div>
 );
 
-const ResultList = ({ results, style }) => (
+export const ResultList = ({ results, onClick, style }) => (
   <div style={ centerFlex }>
     {
-      Object.keys(results).map(key =>
-        <Result key={ results[key] } brandName={ results[key] } style={ style } />
+      Object.keys(results).map(key => {
+        return(
+          <RaisedButton
+            name={ results[key] } onClick={ () => onClick(results[key]) }
+            backgroundColor={ style.backgroundColor } style={ style.button }
+            key={ results[key] } >
+              <div style={ style.brandName }>
+                { results[key] }
+              </div>
+          </RaisedButton>
+        )
+      }
+
       )
     }
   </div>
 );
 
-const Result = ({ brandName, style }) => (
-  <RaisedButton backgroundColor={ style.backgroundColor } style={ style.button }>
+const Result = ({ brandName, onClick, style }) => (
+  <RaisedButton onClick={ () => onClick(brandName) } backgroundColor={ style.backgroundColor } style={ style.button }>
     <div style={ style.brandName }>
       { brandName }
     </div>
