@@ -42,10 +42,7 @@ class App extends Component {
             value={ this.state.brandInput }
             onChange={ this.brandChanged }
           />
-          <div name="results" >
-            <h1>BRANDS</h1>
-            <ResultsComponent results={ this.state.results } />
-          </div>
+          <ResultsComponent results={ this.state.results } />
         </div>
       </MuiThemeProvider>
     );

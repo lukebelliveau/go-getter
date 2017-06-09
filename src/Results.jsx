@@ -4,22 +4,25 @@ import MediaQuery from 'react-responsive';
 
 import { LOADING_RESULTS } from './App';
 
-
 const ResultsContainer = ({ results }) => (
-  results === LOADING_RESULTS
-    ? <CircularProgress />
-    : <div id="searchResults">
-        <MediaQuery minDeviceWidth={1224}>
-          <ResultList results={ results } style={ desktopStyle } />
+  <div name="results" style={ centerFlex }>
+    {
+      results === LOADING_RESULTS
+        ? <CircularProgress />
+        : <div id="searchResults">
+        <MediaQuery minDeviceWidth={ mobileWidth }>
+          <ResultList results={ results } style={ desktopStyle }/>
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={1224}>
-          <ResultList results={ results } style={ mobileStyle } />
+        <MediaQuery maxDeviceWidth={ mobileWidth }>
+          <ResultList results={ results } style={ mobileStyle }/>
         </MediaQuery>
       </div>
+    }
+  </div>
 );
 
 const ResultList = ({ results, style }) => (
-  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+  <div style={ centerFlex }>
     {
       Object.keys(results).map(key =>
         <Result key={ results[key] } brandName={ results[key] } style={ style } />
@@ -62,5 +65,14 @@ const desktopStyle = {
     color: fontColor,
   }
 };
+
+const centerFlex = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  margin: 20,
+};
+
+const mobileWidth = 480;
 
 export default ResultsContainer;
