@@ -3,6 +3,9 @@ import { CircularProgress, RaisedButton } from 'material-ui';
 import MediaQuery from 'react-responsive';
 
 import { LOADING_RESULTS } from './App';
+import styles from './styles';
+
+const { centerFlex } = styles;
 
 const ResultsContainer = ({ results }) => (
   <div name="results" style={ centerFlex }>
@@ -64,13 +67,6 @@ const desktopStyle = {
   brandName: {
     color: fontColor,
   }
-};
-
-const centerFlex = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  margin: 20,
 };
 
 const mobileWidth = 480;
