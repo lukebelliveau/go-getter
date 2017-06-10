@@ -1,11 +1,28 @@
 import React from 'react';
 import { CircularProgress, RaisedButton } from 'material-ui';
-import MediaQuery from 'react-responsive';
 
 import { LOADING_RESULTS } from './App';
+import ResponsiveContainer from './ResponsiveContainer';
 import styles from './styles';
 
 const { centerFlex } = styles;
+
+// const ResultsContainer = ({ results, onClick }) => (
+//   <div name="results" style={ centerFlex }>
+//     {
+//       results === LOADING_RESULTS
+//         ? <CircularProgress />
+//         : <div id="searchResults">
+//         <MediaQuery minDeviceWidth={ mobileWidth }>
+//           <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
+//         </MediaQuery>
+//         <MediaQuery maxDeviceWidth={ mobileWidth }>
+//           <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>
+//         </MediaQuery>
+//       </div>
+//     }
+//   </div>
+// );
 
 const ResultsContainer = ({ results, onClick }) => (
   <div name="results" style={ centerFlex }>
@@ -13,12 +30,12 @@ const ResultsContainer = ({ results, onClick }) => (
       results === LOADING_RESULTS
         ? <CircularProgress />
         : <div id="searchResults">
-        <MediaQuery minDeviceWidth={ mobileWidth }>
-          <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
-        </MediaQuery>
-        <MediaQuery maxDeviceWidth={ mobileWidth }>
-          <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>
-        </MediaQuery>
+        {
+          ResponsiveContainer({
+            mobileComponent: <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>,
+            desktopComponent: <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
+          })
+        }
       </div>
     }
   </div>
@@ -70,7 +87,5 @@ const desktopStyle = {
     color: fontColor,
   }
 };
-
-const mobileWidth = 480;
 
 export default ResultsContainer;
