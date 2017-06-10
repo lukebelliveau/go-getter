@@ -25,7 +25,6 @@ class App extends Component {
 
   brandChanged(event) {
     const brandInput = event.target.value;
-    if (brandInput === "") return;
     this.setState(() => ({
       brandInput,
       results: (brandInput === "") ? {} : LOADING_RESULTS,

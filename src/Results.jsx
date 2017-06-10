@@ -7,23 +7,6 @@ import styles from './styles';
 
 const { centerFlex } = styles;
 
-// const ResultsContainer = ({ results, onClick }) => (
-//   <div name="results" style={ centerFlex }>
-//     {
-//       results === LOADING_RESULTS
-//         ? <CircularProgress />
-//         : <div id="searchResults">
-//         <MediaQuery minDeviceWidth={ mobileWidth }>
-//           <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
-//         </MediaQuery>
-//         <MediaQuery maxDeviceWidth={ mobileWidth }>
-//           <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>
-//         </MediaQuery>
-//       </div>
-//     }
-//   </div>
-// );
-
 const ResultsContainer = ({ results, onClick }) => (
   <div name="results" style={ centerFlex }>
     {
