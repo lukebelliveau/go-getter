@@ -7,4 +7,4 @@ const centerFlex = {
 
 export default {
   centerFlex,
-}
+};
