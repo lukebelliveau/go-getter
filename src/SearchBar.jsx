@@ -26,16 +26,14 @@ const MobileSearchBar = ({ value, onChange }) => (
       id="brandInput" name="brandInput"
       value={ value }
       onChange={ onChange }
-      floatingLabelText="Search by brand"
-      floatingLabelStyle={{ color: '#9A9998' }}
+      hintText="Search for brands"
       underlineFocusStyle={{ color: '#9A9998' }}
-      floatingLabelFocusStyle={{ color: '#9A9998' }}
       style={{
         width: '100%',
-        height: 100
+        height: 200
       }}
       inputStyle={{
-        fontSize: 50,
+        fontSize: 100,
         textAlign: 'center'
       }}
     />

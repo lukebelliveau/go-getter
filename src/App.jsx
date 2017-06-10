@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Dialog, FlatButton, Card, CardHeader, TextField } from 'material-ui';
+import { Dialog, RaisedButton, Card, TextField } from 'material-ui';
 import update from 'immutability-helper';
 
 import ResultsComponent from './Results';
@@ -64,11 +64,11 @@ class App extends Component {
   changeCity(event) {
     const city = event.target.value;
 
-    this.setState((prevState) => {
-      return update(prevState, {
+    this.setState((prevState) =>
+      update(prevState, {
         dialog: { city: { $set: city } }
       })
-    });
+    );
   }
 
   confirmBrand() {
@@ -92,24 +92,71 @@ class App extends Component {
   }
 }
 
+// const BrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
+//   const actions = [
+//     <FlatButton
+//       label="Cancel"
+//       onTouchTap={ closeDialog }
+//     />,
+//     <FlatButton
+//       label="Submit"
+//       primary={true}
+//       onTouchTap={ submit }
+//     />,
+//   ];
+//
+//   return (
+//     <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
+//       <Card>
+//         <TextField floatingLabelText="City" value={ (city === undefined) ? '' : city } onChange={ onChangeCity } style={{ margin: 20 }}/>
+//       </Card>
+//     </Dialog>
+//   )
+// };
+
 const BrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
+  const buttonHeight = 125;
   const actions = [
-    <FlatButton
+    <RaisedButton
       label="Cancel"
       onTouchTap={ closeDialog }
+      style={{
+        height: buttonHeight
+      }}
     />,
-    <FlatButton
+    <RaisedButton
       label="Submit"
       primary={true}
       onTouchTap={ submit }
+      style={{
+        height: buttonHeight
+      }}
     />,
   ];
 
   return (
-    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog">
+    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" actionsContainerStyle={{
+      display: 'flex',
+      flexDirection: 'column-reverse',
+    }}
+    title={ brand }
+    titleStyle={{
+      fontSize: 50,
+      lineHeight: 1,
+      wordWrap: 'break-word'
+    }}
+    >
       <Card>
-        <CardHeader title={ brand } />
-        <TextField floatingLabelText="City" value={ (city === undefined) ? '' : city } onChange={ onChangeCity } style={{ margin: 20 }}/>
+        <TextField hintText="City" value={ city || '' } onChange={ onChangeCity }
+           style={{
+             marginTop: 20,
+             marginBottom: 40,
+             fontSize: 75,
+             width: '100%',
+             height: 75,
+           }}
+         underlineShow={ false }
+        />
       </Card>
     </Dialog>
   )
