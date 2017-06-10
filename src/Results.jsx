@@ -28,29 +28,20 @@ export const ResultList = ({ results, onClick, style }) => (
   <div style={ centerFlex }>
     {
       Object.keys(results).map(key => {
+        const brandName = results[key];
         return(
           <RaisedButton
-            name={ results[key] } onClick={ () => onClick(results[key]) }
+            name={ brandName } onClick={ () => onClick(brandName) }
             backgroundColor={ style.backgroundColor } style={ style.button }
-            key={ results[key] } >
+            key={ brandName } >
               <div style={ style.brandName }>
-                { results[key] }
+                { brandName }
               </div>
           </RaisedButton>
         )
-      }
-
-      )
+      })
     }
   </div>
-);
-
-const Result = ({ brandName, onClick, style }) => (
-  <RaisedButton onClick={ () => onClick(brandName) } backgroundColor={ style.backgroundColor } style={ style.button }>
-    <div style={ style.brandName }>
-      { brandName }
-    </div>
-  </RaisedButton>
 );
 
 const backgroundColor = '#FA9100';
