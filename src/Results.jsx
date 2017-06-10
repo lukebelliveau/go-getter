@@ -12,14 +12,14 @@ const ResultsContainer = ({ results, onClick }) => (
     {
       results === LOADING_RESULTS
         ? <CircularProgress />
-        : <div id="searchResults">
-        {
-          ResponsiveContainer({
-            mobileComponent: <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>,
-            desktopComponent: <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
-          })
-        }
-      </div>
+        : <div id="searchResults" style={{ width: '100%' }}>
+            {
+              ResponsiveContainer({
+                mobileComponent: <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>,
+                desktopComponent: <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
+              })
+            }
+          </div>
     }
   </div>
 );

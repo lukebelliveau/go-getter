@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Dialog, FlatButton } from 'material-ui';
+import { Dialog, FlatButton, Card, CardHeader, TextField } from 'material-ui';
+import update from 'immutability-helper';
 
 import ResultsComponent from './Results';
 import SearchBar from './SearchBar';
-import { getBrandsByName } from './api/pinataAPIClient';
+import { getBrandsByName, postBrandAndCity } from './api/pinataAPIClient';
 
 export const LOADING_RESULTS = 'loading_brand_results';
 
@@ -14,13 +15,18 @@ class App extends Component {
     this.state = {
       brandInput: '',
       results: {},
-      showBrandDialog: false,
+      dialog: {
+        show: false,
+        brand: '',
+        city: '',
+      },
     };
 
     this.brandChanged = this.brandChanged.bind(this);
     this.brandClicked = this.brandClicked.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.confirmBrand = this.confirmBrand.bind(this);
+    this.changeCity = this.changeCity.bind(this);
   }
 
   brandChanged(event) {
@@ -40,18 +46,35 @@ class App extends Component {
 
   brandClicked(brand) {
     this.setState(() => ({
-      showBrandDialog: true,
+      dialog: {
+        show: true,
+        brand,
+      },
     }))
   }
 
   closeDialog() {
     this.setState(() => ({
-      showBrandDialog: false,
+      dialog: {
+        show: false,
+      }
     }))
   }
 
+  changeCity(event) {
+    const city = event.target.value;
+
+    this.setState((prevState) => {
+      return update(prevState, {
+        dialog: { city: { $set: city } }
+      })
+    });
+  }
+
   confirmBrand() {
-    console.log('confirming brand!');
+    postBrandAndCity()
+      .then(response => console.log(response));
+    this.closeDialog();
   }
 
   render() {
@@ -62,30 +85,33 @@ class App extends Component {
             value={ this.state.brandInput } onChange={ this.brandChanged }
           />
           <ResultsComponent results={ this.state.results } onClick={ this.brandClicked }/>
-          <BrandDialog open={ this.state.showBrandDialog } submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
+          <BrandDialog brand={ this.state.dialog.brand } city={ this.state.dialog.city } onChangeCity={ this.changeCity } open={ this.state.dialog.show } submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-const BrandDialog = ({ open, submit, closeDialog }) => {
+const BrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
   const actions = [
     <FlatButton
       label="Cancel"
-      primary={true}
       onTouchTap={ closeDialog }
     />,
     <FlatButton
       label="Submit"
       primary={true}
-      keyboardFocused={true}
       onTouchTap={ submit }
     />,
   ];
 
   return (
-    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" />
+    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog">
+      <Card>
+        <CardHeader title={ brand } />
+        <TextField floatingLabelText="City" value={ (city === undefined) ? '' : city } onChange={ onChangeCity } style={{ margin: 20 }}/>
+      </Card>
+    </Dialog>
   )
 };
 
