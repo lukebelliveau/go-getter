@@ -24,58 +24,63 @@ const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDial
   return (
     <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
       <Card>
-        <TextField floatingLabelText="City" value={ (city === undefined) ? '' : city } onChange={ onChangeCity } style={{ margin: 20 }}/>
+        <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
       </Card>
     </Dialog>
   )
 };
 
 const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
-  const buttonHeight = 125;
   const actions = [
     <RaisedButton
       label="Cancel"
       onTouchTap={ closeDialog }
-      style={{
-        height: buttonHeight
-      }}
+      style={ mobileStyles.buttons }
     />,
     <RaisedButton
       label="Submit"
       primary={true}
       onTouchTap={ submit }
-      style={{
-        height: buttonHeight
-      }}
+      style={ mobileStyles.buttons }
     />,
   ];
 
   return (
-    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" actionsContainerStyle={{
-      display: 'flex',
-      flexDirection: 'column-reverse',
-    }}
-            title={ brand }
-            titleStyle={{
-              fontSize: 50,
-              lineHeight: 1,
-              wordWrap: 'break-word'
-            }}
+    <Dialog
+      open={ open } actions={ actions } onRequestClose={ closeDialog }
+      id="brandDialog" actionsContainerStyle={ mobileStyles.buttonContainer }
+      title={ brand } titleStyle={ mobileStyles.tile }
     >
       <Card>
-        <TextField hintText="City" value={ city || '' } onChange={ onChangeCity }
-                   style={{
-                     marginTop: 20,
-                     marginBottom: 40,
-                     fontSize: 75,
-                     width: '100%',
-                     height: 75,
-                   }}
-                   underlineShow={ false }
+        <TextField
+          hintText="City" value={ city || '' } onChange={ onChangeCity }
+          style={ mobileStyles.text } underlineShow={ false }
         />
       </Card>
     </Dialog>
   )
+};
+
+const mobileStyles = {
+  tile: {
+    fontSize: 50,
+    lineHeight: 1,
+    wordWrap: 'break-word'
+  },
+  buttonContainer:  {
+    display: 'flex',
+    flexDirection: 'column-reverse',
+  },
+  text: {
+    marginTop: 20,
+    marginBottom: 40,
+    fontSize: 75,
+    width: '100%',
+    height: 75,
+  },
+  buttons: {
+    height: 125,
+  }
 };
 
 export default BrandDialog;
