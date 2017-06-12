@@ -7,10 +7,11 @@ import { Snackbar } from 'material-ui';
 import ResultsComponent from './Results';
 import SearchBar from './SearchBar';
 import BrandDialog from './BrandDialog'
-import { getBrandsByName, postBrandAndCity } from './api/pinataAPIClient';
+import { searchForBrands, registerBrandInCity } from './api/apiHelper';
 
 export const LOADING_RESULTS = 'loading_brand_results';
 
+const waitToStopTyping = 800;
 const toastDuration = 4000;
 
 class App extends Component {
@@ -49,12 +50,12 @@ class App extends Component {
       userTyping: false,
       updateTimeout: setTimeout(() => {
         this.updateResults(brandInput)
-      }, 800)
+      }, waitToStopTyping)
     }));
   }
 
   updateResults(brandInput) {
-    getBrandsByName(brandInput)
+    searchForBrands(brandInput)
       .then((brandResults) => {
         this.setState(() => ({
           results: brandResults,
@@ -91,7 +92,7 @@ class App extends Component {
 
   confirmBrand() {
     const { city, brand } = this.state.dialog;
-    postBrandAndCity(city, brand)
+    registerBrandInCity(brand, city)
       .then(message => {
         this.setState({
           toast: {
