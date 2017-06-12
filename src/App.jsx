@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import update from 'immutability-helper';
 
+import { Snackbar } from 'material-ui';
+
 import ResultsComponent from './Results';
 import SearchBar from './SearchBar';
 import BrandDialog from './BrandDialog'
 import { getBrandsByName, postBrandAndCity } from './api/pinataAPIClient';
 
 export const LOADING_RESULTS = 'loading_brand_results';
+
+const toastDuration = 4000;
 
 class App extends Component {
   constructor() {
@@ -19,6 +23,10 @@ class App extends Component {
         show: false,
         brand: '',
         city: '',
+      },
+      toast: {
+        open: false,
+        message: '',
       },
       userTyping: false,
       updateTimeout: 0,
@@ -84,8 +92,22 @@ class App extends Component {
   confirmBrand() {
     const { city, brand } = this.state.dialog;
     postBrandAndCity(city, brand)
-      .then(response => console.log(response));
+      .then(response => {
+        this.setState({
+          toast: {
+            open: true,
+            message: `Congrats! You've registered for ${brand} in ${capitalize(city)}. Go get em!`,
+          }
+        })
+      });
     this.closeDialog();
+
+    setTimeout(() => this.setState({
+      toast: {
+        open: false,
+        message: '',
+      }
+    }), toastDuration)
   }
 
   render() {
@@ -97,10 +119,21 @@ class App extends Component {
           />
           <ResultsComponent results={ this.state.results } onClick={ this.brandClicked }/>
           <BrandDialog brand={ this.state.dialog.brand } city={ this.state.dialog.city } onChangeCity={ this.changeCity } open={ this.state.dialog.show } submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
+          <Toast { ...this.state.toast }/>
         </div>
       </MuiThemeProvider>
     );
   }
 }
+
+const Toast = ({ open, message }) => (
+  <Snackbar
+    open={ open }
+    message={ message }
+    autoHideDuration={ toastDuration }
+  />
+);
+
+const capitalize = (string) => string.replace(/\b\w/g, l => l.toUpperCase());
 
 export default App;
