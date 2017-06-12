@@ -92,7 +92,13 @@ const Toast = ({ open, message }) => (
     open={ open }
     message={ message }
     autoHideDuration={ toastDuration }
+    bodyStyle={{
+      backgroundColor: messageColor(message)
+    }}
   />
 );
+
+//bad for maintainability -- need to figure out better place to hold messages
+const messageColor = (message) => message.includes('Congrats') ? '#388E3C' : '#D50000';
 
 export default SubmitBrand;
