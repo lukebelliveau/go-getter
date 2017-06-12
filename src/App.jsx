@@ -72,7 +72,8 @@ class App extends Component {
   }
 
   confirmBrand() {
-    postBrandAndCity()
+    const { city, brand } = this.state.dialog;
+    postBrandAndCity(city, brand)
       .then(response => console.log(response));
     this.closeDialog();
   }

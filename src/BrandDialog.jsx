@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, RaisedButton, FlatButton, Card, TextField } from 'material-ui';
+import { Dialog, RaisedButton, FlatButton, TextField } from 'material-ui';
 
 import ResponsiveContainer from './ResponsiveContainer';
 
@@ -8,64 +8,42 @@ const BrandDialog = (props) => ResponsiveContainer({
   desktopComponent: <DesktopBrandDialog { ...props } />
 });
 
-const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
-  const actions = [
-    <FlatButton
-      label="Cancel"
-      onTouchTap={ closeDialog }
-    />,
-    <FlatButton
-      label="Submit"
-      primary={true}
-      onTouchTap={ submit }
-    />,
-  ];
+const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
+  <Dialog open={ open } actions={ dialogButtons(FlatButton, submit, closeDialog, {}) } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
+      <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
+  </Dialog>
+);
 
-  return (
-    <Dialog open={ open } actions={ actions } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
-      <Card>
-        <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
-      </Card>
-    </Dialog>
-  )
-};
+const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
+  <Dialog open={ open } actions={ dialogButtons(RaisedButton, submit, closeDialog, mobileStyles) }
+    onRequestClose={ closeDialog } id="brandDialog" actionsContainerStyle={ mobileStyles.buttonContainer }
+    title={ brand } titleStyle={ mobileStyles.tile }>
+      <TextField
+        hintText="City" value={ city || '' } onChange={ onChangeCity }
+        style={ mobileStyles.text } underlineShow={ false }
+      />
+  </Dialog>
+);
 
-const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => {
-  const actions = [
-    <RaisedButton
-      label="Cancel"
-      onTouchTap={ closeDialog }
-      style={ mobileStyles.buttons }
-    />,
-    <RaisedButton
-      label="Submit"
-      primary={true}
-      onTouchTap={ submit }
-      style={ mobileStyles.buttons }
-    />,
-  ];
 
-  return (
-    <Dialog
-      open={ open } actions={ actions } onRequestClose={ closeDialog }
-      id="brandDialog" actionsContainerStyle={ mobileStyles.buttonContainer }
-      title={ brand } titleStyle={ mobileStyles.tile }
-    >
-      <Card>
-        <TextField
-          hintText="City" value={ city || '' } onChange={ onChangeCity }
-          style={ mobileStyles.text } underlineShow={ false }
-        />
-      </Card>
-    </Dialog>
-  )
-};
+const dialogButtons = (ButtonComponent, submit, close, style) => ([
+  <ButtonComponent
+    label="Cancel"
+    onTouchTap={ close }
+    style={ style.buttons }
+  />,
+  <ButtonComponent
+    label="Submit"
+    primary={true}
+    onTouchTap={ submit }
+    style={ style.buttons }
+  />,
+]);
 
 const mobileStyles = {
   tile: {
     fontSize: 50,
     lineHeight: 1,
-    wordWrap: 'break-word'
   },
   buttonContainer:  {
     display: 'flex',
@@ -76,7 +54,7 @@ const mobileStyles = {
     marginBottom: 40,
     fontSize: 75,
     width: '100%',
-    height: 75,
+    height: 80,
   },
   buttons: {
     height: 125,

@@ -14,7 +14,7 @@ const get = (endpoint, param) =>
     .then(handleErrors)
     .then(response => response.text())
     .catch((networkError) => {
-      console.log(networkError);
+      throw Error(networkError);
     });
 
 export const getBrandsByName =
@@ -24,17 +24,30 @@ export const getBrandsByName =
 
 export const getBrandsByCity = city => get(cityEndpoint, city);
 
-export const postBrandAndCity = () => {
+export const submissionResults = {
+  SUCCESS: 'Ok!',
+  NOT_OFFERED: 'That brand is not offered in that city!'
+};
+
+export const postBrandAndCity = (city, brand) => {
   return fetch('https://us-central1-pinata-1470075080669.cloudfunctions.net/cities', {
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify({
-      city: 'New York',
-      brand: 'Smirnoff Vodka',
+      city: city,
+      brand: brand,
     })
   })
     .then(handleErrors)
-    .then(response => response.text())
+    .then(resp => {
+      return resp.text()
+        .then(response => {
+          if (response === submissionResults.SUCCESS) return 'Successfully Registered!';
+          else if (response === submissionResults.NOT_OFFERED) return 'Sorry, we do not offer this brand at that location at this time.';
+          else return 'Sorry, there was an issue with this request. We may not offer services in this city. Please check your network connection.';
+        })
+    })
     .catch((networkError) => {
-      console.log(networkError);
+      console.log('network error');
+      throw Error(networkError);
     });
 };
