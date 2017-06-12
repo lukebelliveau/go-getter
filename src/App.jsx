@@ -20,6 +20,8 @@ class App extends Component {
         brand: '',
         city: '',
       },
+      userTyping: false,
+      updateTimeout: 0,
     };
 
     this.brandChanged = this.brandChanged.bind(this);
@@ -30,12 +32,20 @@ class App extends Component {
   }
 
   brandChanged(event) {
+    if (this.state.updateTimeout) clearTimeout(this.state.updateTimeout);
+
     const brandInput = event.target.value;
     this.setState(() => ({
       brandInput,
       results: (brandInput === "") ? {} : LOADING_RESULTS,
+      userTyping: false,
+      updateTimeout: setTimeout(() => {
+        this.updateResults(brandInput)
+      }, 800)
     }));
+  }
 
+  updateResults(brandInput) {
     getBrandsByName(brandInput)
       .then((brandResults) => {
         this.setState(() => ({
