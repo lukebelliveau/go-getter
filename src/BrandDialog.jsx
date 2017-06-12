@@ -17,7 +17,7 @@ const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDial
 const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
   <Dialog open={ open } actions={ dialogButtons(RaisedButton, submit, closeDialog, mobileStyles) }
     onRequestClose={ closeDialog } id="brandDialog" actionsContainerStyle={ mobileStyles.buttonContainer }
-    title={ brand } titleStyle={ mobileStyles.tile }>
+    title={ brand } titleStyle={ mobileStyles.title }>
       <TextField
         hintText="City" value={ city || '' } onChange={ onChangeCity }
         style={ mobileStyles.text } underlineShow={ false }
@@ -41,7 +41,7 @@ const dialogButtons = (ButtonComponent, submit, close, style) => ([
 ]);
 
 const mobileStyles = {
-  tile: {
+  title: {
     fontSize: 50,
     lineHeight: 1,
   },

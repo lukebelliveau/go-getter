@@ -2,6 +2,7 @@ const url = 'https://us-central1-pinata-1470075080669.cloudfunctions.net';
 const brandEndpoint = `${url}/brands`;
 const cityEndpoint = `${url}/cities`;
 
+
 const handleErrors = (response) => {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -24,7 +25,7 @@ export const getBrandsByName =
 
 export const getBrandsByCity = city => get(cityEndpoint, city);
 
-export const submissionResults = {
+export const serverResponses = {
   SUCCESS: 'Ok!',
   NOT_OFFERED: 'That brand is not offered in that city!'
 };
@@ -37,17 +38,17 @@ export const postBrandAndCity = (city, brand) => {
       brand: brand,
     })
   })
-    .then(handleErrors)
     .then(resp => {
       return resp.text()
         .then(response => {
-          if (response === submissionResults.SUCCESS) return 'Successfully Registered!';
-          else if (response === submissionResults.NOT_OFFERED) return 'Sorry, we do not offer this brand at that location at this time.';
-          else return 'Sorry, there was an issue with this request. We may not offer services in this city. Please check your network connection.';
+          if (response === serverResponses.SUCCESS) return `Congrats! You've registered for ${brand} in ${capitalize(city)}. Go get em!`;
+          else if (response === serverResponses.NOT_OFFERED) return `Sorry, we do not offer ${brand} in ${capitalize(city)} at this time.`;
+          else throw Error(response);
         })
     })
-    .catch((networkError) => {
-      console.log('network error');
-      throw Error(networkError);
+    .catch(() => {
+      return 'Sorry, there was an issue with this request.';
     });
 };
+
+const capitalize = (string) => string.replace(/\b\w/g, l => l.toUpperCase());

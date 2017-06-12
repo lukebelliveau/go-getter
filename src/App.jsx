@@ -92,11 +92,11 @@ class App extends Component {
   confirmBrand() {
     const { city, brand } = this.state.dialog;
     postBrandAndCity(city, brand)
-      .then(response => {
+      .then(message => {
         this.setState({
           toast: {
             open: true,
-            message: `Congrats! You've registered for ${brand} in ${capitalize(city)}. Go get em!`,
+            message: message,
           }
         })
       });
@@ -133,7 +133,5 @@ const Toast = ({ open, message }) => (
     autoHideDuration={ toastDuration }
   />
 );
-
-const capitalize = (string) => string.replace(/\b\w/g, l => l.toUpperCase());
 
 export default App;
