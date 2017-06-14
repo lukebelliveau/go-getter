@@ -31,15 +31,13 @@ const dialogButtons = (ButtonComponent, submit, close, style) => ([
     label="Cancel"
     onTouchTap={ close }
     style={ style.buttons }
-    labelStyle={{ fontSize: 50 }}
-  />,
+    labelStyle={ style.label } />,
   <ButtonComponent
     label="Submit"
     primary={true}
     onTouchTap={ submit }
     style={ style.buttons }
-    labelStyle={{ fontSize: 50 }}
-  />,
+    labelStyle={ style.label } />,
 ]);
 
 const mobileStyles = {
@@ -60,6 +58,9 @@ const mobileStyles = {
   },
   buttons: {
     height: 125,
+  },
+  label: {
+    fontSize: 50
   }
 };
 

@@ -33,6 +33,7 @@ class App extends Component {
 
     this.brandChanged = this.brandChanged.bind(this);
     this.brandClicked = this.brandClicked.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
   }
 
   brandChanged(event) {
@@ -68,13 +69,21 @@ class App extends Component {
     ;
   }
 
+  closeDialog() {
+    this.setState(() => ({
+      dialog: {
+        show: false,
+      }
+    }))
+  }
+
   render() {
     return (
       <MuiThemeProvider>
         <div>
           <SearchBar value={ this.state.brandInput } onChange={ this.brandChanged } />
           <ResultsComponent results={ this.state.results } onClick={ this.brandClicked }/>
-          <SubmitBrand show={ this.state.dialog.show } brand={ this.state.dialog.brand } />
+          <SubmitBrand show={ this.state.dialog.show } brand={ this.state.dialog.brand } closeDialog={ this.closeDialog }/>
         </div>
       </MuiThemeProvider>
     );

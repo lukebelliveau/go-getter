@@ -15,8 +15,6 @@ class SubmitBrand extends Component {
     super(props);
     this.state = {
       dialog: {
-        show: props.show,
-        brand: props.brand,
         city: '',
       },
       toast: {
@@ -25,26 +23,18 @@ class SubmitBrand extends Component {
       },
     };
 
+    this.show = props.show;
+    this.closeParentDialog = props.closeDialog;
+    this.brand = props.brand;
+
     this.closeDialog = this.closeDialog.bind(this);
     this.changeCity = this.changeCity.bind(this);
     this.confirmBrand = this.confirmBrand.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      dialog: {
-        show: nextProps.show,
-        brand: nextProps.brand,
-      }
-    })
-  }
-
-  closeDialog() {
-    this.setState(() => ({
-      dialog: {
-        show: false,
-      }
-    }))
+    this.show = nextProps.show;
+    this.brand = nextProps.brand;
   }
 
   changeCity(event) {
@@ -58,8 +48,7 @@ class SubmitBrand extends Component {
   }
 
   confirmBrand() {
-    const { city, brand } = this.state.dialog;
-    registerBrandInCity(brand, city)
+    registerBrandInCity(this.brand, this.state.dialog.city)
       .then(message => {
         this.setState({
           toast: {
@@ -78,12 +67,21 @@ class SubmitBrand extends Component {
     }), toastDuration)
   }
 
+  closeDialog() {
+    this.setState({
+      dialog: {
+        city: '',
+      },
+    });
+    this.closeParentDialog()
+  }
+
   render() {
     return (
       <div>
         <BrandDialog
-          brand={ this.state.dialog.brand } city={ this.state.dialog.city }
-          onChangeCity={ this.changeCity } open={ this.state.dialog.show }
+          brand={ this.brand } city={ this.state.dialog.city }
+          onChangeCity={ this.changeCity } open={ this.show }
           submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
         <Toast { ...this.state.toast }/>
       </div>
