@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import update from 'immutability-helper';
-import { Snackbar } from 'material-ui';
 import BrandDialog from './BrandDialog';
-import ResponsiveContainer from './ResponsiveContainer';
+import Toast from './Toast';
 import { registerBrandInCity } from './api/apiHelper'
 
 const toastDuration = 4000;
-
-//bad for maintainability -- need to figure out better place to hold messages
-const messageColor = (message) => message.includes('Congrats') ? '#388E3C' : '#D50000';
 
 class SubmitBrand extends Component {
   constructor(props) {
@@ -64,7 +60,7 @@ class SubmitBrand extends Component {
         open: false,
         message: '',
       }
-    }), toastDuration)
+    }), toastDuration * 2)
   }
 
   closeDialog() {
@@ -83,54 +79,10 @@ class SubmitBrand extends Component {
           brand={ this.brand } city={ this.state.dialog.city }
           onChangeCity={ this.changeCity } open={ this.show }
           submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
-        <Toast { ...this.state.toast }/>
+        <Toast open={ this.state.toast.open } message={ this.state.toast.message } toastDuration={ toastDuration }/>
       </div>
     )
   }
 }
-
-const Toast = ({ open, message }) => {
-  const mobile = mobileStyles(message);
-  const desktop = desktopStyles(message);
-
-  return ResponsiveContainer({
-    mobileComponent: <Snackbar open={ open } message={ message }
-                        autoHideDuration={ toastDuration } bodyStyle={ mobile.body }
-                        style={ mobile.style } contentStyle={ mobile.content } />,
-    desktopComponent: <Snackbar open={ open } message={ message }
-                        autoHideDuration={ toastDuration }
-                        bodyStyle={ desktop.body } style={ desktop.style } />
-  })
-};
-
-const mobileStyles = (message) => ({
-  body: {
-    backgroundColor: messageColor(message),
-    height: 200,
-    maxWidth: 'none',
-  },
-  style: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  content: {
-    fontSize: 50,
-    textAlign: 'center',
-    marginTop: 20,
-  },
-});
-
-const desktopStyles = (message) => ({
-  body: {
-    backgroundColor: messageColor(message),
-    maxWidth: 'none',
-  },
-  style: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-});
 
 export default SubmitBrand;
