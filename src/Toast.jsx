@@ -3,7 +3,7 @@ import { Snackbar } from 'material-ui';
 import ResponsiveContainer from './ResponsiveContainer';
 
 //bad for maintainability -- need to figure out better place to hold messages
-const messageColor = (message) => message.includes('Congrats') ? '#388E3C' : '#D50000';
+const messageColor = (message) => (message.indexOf('Congrats') >= 0) ? '#388E3C' : '#D50000';
 
 const Toast = ({ open, message, toastDuration }) => {
   const mobile = mobileStyles(message);
