@@ -31,12 +31,14 @@ const dialogButtons = (ButtonComponent, submit, close, style) => ([
     label="Cancel"
     onTouchTap={ close }
     style={ style.buttons }
+    labelStyle={{ fontSize: 50 }}
   />,
   <ButtonComponent
     label="Submit"
     primary={true}
     onTouchTap={ submit }
     style={ style.buttons }
+    labelStyle={{ fontSize: 50 }}
   />,
 ]);
 
