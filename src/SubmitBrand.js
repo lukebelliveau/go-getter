@@ -90,19 +90,16 @@ class SubmitBrand extends Component {
 }
 
 const Toast = ({ open, message }) => {
-  const {
-    body,
-    style,
-    content
-  } = mobileStyles(message);
+  const mobile = mobileStyles(message);
+  const desktop = desktopStyles(message);
 
   return ResponsiveContainer({
-    mobileComponent: <Snackbar open={ open }message={ message }
-                        autoHideDuration={ toastDuration } bodyStyle={ body }
-                        style={ style } contentStyle={ content } />,
+    mobileComponent: <Snackbar open={ open } message={ message }
+                        autoHideDuration={ toastDuration } bodyStyle={ mobile.body }
+                        style={ mobile.style } contentStyle={ mobile.content } />,
     desktopComponent: <Snackbar open={ open } message={ message }
                         autoHideDuration={ toastDuration }
-                        bodyStyle={{ backgroundColor: messageColor(message) }} />
+                        bodyStyle={ desktop.body } style={ desktop.style } />
   })
 };
 
@@ -120,7 +117,19 @@ const mobileStyles = (message) => ({
   content: {
     fontSize: 50,
     textAlign: 'center',
-    marginTop: 50,
+    marginTop: 20,
+  },
+});
+
+const desktopStyles = (message) => ({
+  body: {
+    backgroundColor: messageColor(message),
+    maxWidth: 'none',
+  },
+  style: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   },
 });
 
