@@ -6,16 +6,14 @@ const { centerFlex } = styles;
 
 import ResponsiveContainer from './ResponsiveContainer';
 
+const placeholder = 'Search for brands';
+
 const DesktopSearchBar = ({ value, onChange }) => (
   <div style={ centerFlex }>
     <TextField
-      id="brandInput" name="brandInput"
       value={ value }
       onChange={ onChange }
-      floatingLabelText="Search by brand"
-      floatingLabelStyle={{ color: '#9A9998' }}
-      underlineFocusStyle={{ color: '#9A9998' }}
-      floatingLabelFocusStyle={{ color: '#9A9998' }}
+      floatingLabelText={ placeholder }
     />
   </div>
 );
@@ -23,11 +21,9 @@ const DesktopSearchBar = ({ value, onChange }) => (
 const MobileSearchBar = ({ value, onChange }) => (
   <div style={ centerFlex }>
     <TextField
-      id="brandInput" name="brandInput"
       value={ value }
       onChange={ onChange }
-      hintText="Search for brands"
-      underlineFocusStyle={{ color: '#9A9998' }}
+      hintText={ placeholder }
       style={{
         width: '100%',
         height: 200
@@ -35,6 +31,9 @@ const MobileSearchBar = ({ value, onChange }) => (
       inputStyle={{
         fontSize: 100,
         textAlign: 'center'
+      }}
+      hintStyle={{
+        textAlign: 'center',
       }}
     />
   </div>

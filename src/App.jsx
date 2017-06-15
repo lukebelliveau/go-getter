@@ -31,12 +31,12 @@ class App extends Component {
     super();
     this.state = initialState;
 
-    this.brandChanged = this.brandChanged.bind(this);
-    this.brandClicked = this.brandClicked.bind(this);
+    this.changeBrandEntry = this.changeBrandEntry.bind(this);
+    this.brandSelected = this.brandSelected.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
   }
 
-  brandChanged(event) {
+  changeBrandEntry(event) {
     if (this.state.updateTimeout) clearTimeout(this.state.updateTimeout);
 
     const brandInput = event.target.value;
@@ -59,7 +59,7 @@ class App extends Component {
       });
   }
 
-  brandClicked(brand) {
+  brandSelected(brand) {
     this.setState(() => ({
       dialog: {
         show: true,
@@ -81,8 +81,8 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <SearchBar value={ this.state.brandInput } onChange={ this.brandChanged } />
-          <ResultsComponent results={ this.state.results } onClick={ this.brandClicked }/>
+          <SearchBar value={ this.state.brandInput } onChange={ this.changeBrandEntry } />
+          <ResultsComponent results={ this.state.results } onClick={ this.brandSelected }/>
           <SubmitBrand show={ this.state.dialog.show } brand={ this.state.dialog.brand } closeDialog={ this.closeDialog }/>
         </div>
       </MuiThemeProvider>
