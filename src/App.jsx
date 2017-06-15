@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -27,19 +28,23 @@ const initialState = {
 };
 
 class App extends Component {
+  state = initialState;
+  changeBrandEntry: Function;
+  brandSelected: Function;
+  closeDialog: Function;
+
   constructor() {
     super();
-    this.state = initialState;
 
     this.changeBrandEntry = this.changeBrandEntry.bind(this);
     this.brandSelected = this.brandSelected.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
   }
 
-  changeBrandEntry(event) {
+  changeBrandEntry(event: Event & { currentTarget: HTMLInputElement }) {
     if (this.state.updateTimeout) clearTimeout(this.state.updateTimeout);
 
-    const brandInput = event.target.value;
+    const brandInput = event.currentTarget.value;
     this.setState(() => ({
       brandInput,
       results: (brandInput === "") ? {} : LOADING_RESULTS,
@@ -50,7 +55,7 @@ class App extends Component {
     }));
   }
 
-  updateResults(brandInput) {
+  updateResults(brandInput: string) {
     searchForBrands(brandInput)
       .then((brandResults) => {
         this.setState(() => ({
@@ -59,7 +64,7 @@ class App extends Component {
       });
   }
 
-  brandSelected(brand) {
+  brandSelected(brand: string) {
     this.setState(() => ({
       dialog: {
         show: true,

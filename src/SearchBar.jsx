@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { TextField } from 'material-ui';
 
@@ -39,7 +40,7 @@ const MobileSearchBar = ({ value, onChange }) => (
   </div>
 );
 
-export default ({ value, onChange }) => ResponsiveContainer({
+export default ({ value, onChange }: { value: string, onChange: () => void }) => ResponsiveContainer({
   mobileComponent: <MobileSearchBar value={ value } onChange={ onChange } />,
   desktopComponent: <DesktopSearchBar value={ value } onChange={ onChange } />
 });
