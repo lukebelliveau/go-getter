@@ -151,4 +151,4 @@ const ResponsiveDialog = () => (
   </Overlay>
 );
 
-export default ResponsiveDialog;
+export default BrandDialog;
