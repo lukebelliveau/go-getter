@@ -4,7 +4,7 @@ import MediaQuery from 'react-responsive';
 
 const mobileWidth = 480;
 
-export default ({ mobileComponent, desktopComponent }: { mobileComponent: React$Element<any>, desktopComponent: React$Element<any> }) => (
+export default ({ mobileComponent, desktopComponent }: { mobileComponent: React$Element<*>, desktopComponent: React$Element<*> }) => (
   <div>
     <MediaQuery maxDeviceWidth={ mobileWidth }>
       {

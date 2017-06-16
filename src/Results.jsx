@@ -23,25 +23,28 @@ const ResultsContainer = ({ results, onClick }: { results: { [string]: string },
   </div>
 );
 
-export const ResultList = ({ results, onClick, style }: { results: { [string]: string }, onClick: (string) => void, style: any }) => (
-  <div style={ centerFlex }>
-    {
-      Object.keys(results).map(key => {
-        const brandName = results[key];
-        return(
-          <RaisedButton
-            name={ brandName } onClick={ () => onClick(brandName) }
-            backgroundColor={ style.backgroundColor } style={ style.button }
-            key={ brandName } >
+export const ResultList = ({ results, onClick, style }: { results: { [string]: string }, onClick: (string) => void, style: Object }) => {
+  console.log(typeof style);
+  return (
+    <div style={ centerFlex }>
+      {
+        Object.keys(results).map(key => {
+          const brandName = results[key];
+          return(
+            <RaisedButton
+              name={ brandName } onClick={ () => onClick(brandName) }
+              backgroundColor={ style.backgroundColor } style={ style.button }
+              key={ brandName } >
               <div style={ style.brandName }>
                 { brandName }
               </div>
-          </RaisedButton>
-        )
-      })
-    }
-  </div>
-);
+            </RaisedButton>
+          )
+        })
+      }
+    </div>
+  );
+}
 
 const backgroundColor = '#FA9100';
 const fontColor = '#FFFFFF';
