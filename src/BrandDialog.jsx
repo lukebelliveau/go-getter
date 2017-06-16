@@ -37,7 +37,6 @@ class Modal extends React.Component {
             </Container>
         </Overlay>
         : null
-
     )
   }
 }
