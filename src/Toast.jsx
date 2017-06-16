@@ -54,4 +54,3 @@ const Toast = ({ open, message }: { open: boolean, message: string }) => (
 );
 
 export default Toast;
-

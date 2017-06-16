@@ -1,69 +1,48 @@
 import React from 'react';
-import { Dialog, RaisedButton, FlatButton, TextField } from 'material-ui';
 import styled from 'styled-components';
 
 import ResponsiveContainer from './ResponsiveContainer';
 
-const BrandDialog = (props) => ResponsiveContainer({
-  mobileComponent: <MobileBrandDialog { ...props } />,
-  desktopComponent: <DesktopBrandDialog { ...props } />
-});
+const primaryColor = '#D50000';
 
-const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
-  <Dialog open={ open } actions={ dialogButtons(FlatButton, submit, closeDialog, {}) } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
-      <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
-  </Dialog>
-);
+class Modal extends React.Component {
+  constructor(props) {
+    super(props);
 
-const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
-  <Dialog open={ open } actions={ dialogButtons(RaisedButton, submit, closeDialog, mobileStyles) }
-    onRequestClose={ closeDialog } id="brandDialog" actionsContainerStyle={ mobileStyles.buttonContainer }
-    title={ brand } titleStyle={ mobileStyles.title }>
-      <TextField
-        hintText="City" value={ city || '' } onChange={ onChangeCity }
-        style={ mobileStyles.text } underlineShow={ false }
-      />
-  </Dialog>
-);
+    this.props = props;
 
+    this.state = {
+      // show: this.props.show
+      show: true
+    };
 
-const dialogButtons = (ButtonComponent, submit, close, style) => ([
-  <ButtonComponent
-    label="Cancel"
-    onTouchTap={ close }
-    style={ style.buttons }
-    labelStyle={ style.label } />,
-  <ButtonComponent
-    label="Submit"
-    primary={true}
-    onTouchTap={ submit }
-    style={ style.buttons }
-    labelStyle={ style.label } />,
-]);
-
-const mobileStyles = {
-  title: {
-    fontSize: 50,
-    lineHeight: 1,
-  },
-  buttonContainer:  {
-    display: 'flex',
-    flexDirection: 'column-reverse',
-  },
-  text: {
-    marginTop: 20,
-    marginBottom: 40,
-    fontSize: 75,
-    width: '100%',
-    height: 80,
-  },
-  buttons: {
-    height: 125,
-  },
-  label: {
-    fontSize: 50
+    this.click = this.click.bind(this);
   }
-};
+
+  click(event) {
+    let newState;
+    switch(event.target.id) {
+      case 'overlay':
+        newState = { show: false }
+    }
+    this.setState(newState);
+  }
+
+  render() {
+    return (
+      this.state.show
+        ? <Overlay onClick={ this.click } id="overlay">
+            <Container>
+              <Header>{ this.props.brand }</Header>
+              <Body/>
+              <Footer/>
+            </Container>
+        </Overlay>
+        : null
+
+    )
+  }
+}
 
 const Overlay = styled.div`
   display: block;
@@ -85,39 +64,77 @@ const Container = styled.div`
   background-color: #fefefe;
   margin: auto;
   padding: 0;
-  border: 1px solid #888;
   width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s
+  &:after {
+    content:""; 
+    background: black; 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    height: 50%; 
+    width: 1px;
+  }
 `;
 
 const HeaderContainer = styled.div`
   padding: 2px 16px;
   font-family: sans-serif;
-  border-bottom-color: lightslategrey;
-  border-bottom-style: solid;
+  &:after {
+    content:''; 
+    width: 90%; 
+    height:1px; 
+    background: lightgray; 
+    position:absolute; 
+  }
 `;
-const Header = () => (
+const Header = ({ children }) => (
   <HeaderContainer>
-    <h2>Modal Header</h2>
+    <h2>{ children }</h2>
   </HeaderContainer>
 );
 
 const BodyContainer = styled.div`
   padding: 20px 16px 0px 16px;
 `;
+// const Input = styled.input`
+//   width: 50%;
+//   font-size: 20px;
+//   height: 40px;
+//   border-style: groove;
+// `;
 const Input = styled.input`
-  width: 50%;
-  font-size: 20px;
-  height: 40px;
-  border-style: groove;
+  margin: 40px 25px;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px ${primaryColor};
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+  font-family: 'roboto', sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+  &:focus{
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
+    font-size: 11px;
+  }
 `;
 const Body = () => (
   <BodyContainer>
-    <Input />
+    <Input placeholder="City"/>
   </BodyContainer>
 );
 
@@ -132,23 +149,30 @@ const Button = styled.div`
   padding: 10px;
   color: ${props => props.color};
   font-family: Roboto, sans-serif;
+  &:hover{
+    background-color: #EEEEEE;
+    cursor: pointer;
+  }
 `;
 
 const Footer = () => (
   <FooterContainer>
     <Button color="gray">CANCEL</Button>
-    <Button color="blue">SUBMIT</Button>
+    <Button color={ primaryColor }>SUBMIT</Button>
   </FooterContainer>
 );
 
-const ResponsiveDialog = () => (
+const ResponsiveDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
+  open
+    ?
   <Overlay>
     <Container>
-      <Header/>
+      <Header>{ brand }</Header>
       <Body/>
       <Footer/>
     </Container>
   </Overlay>
+    : null
 );
 
-export default BrandDialog;
+export default Modal;
