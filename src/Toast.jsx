@@ -36,7 +36,7 @@ const Content = styled.div`
 `;
 
 const Container = styled.div`
-  animation: ${fadeIn} 0.1s linear;
+  animation: ${fadeIn} 0.2s linear;
   display: flex;
   justify-content: center;
   width: 100%;

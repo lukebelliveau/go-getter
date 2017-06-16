@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -44,7 +44,18 @@ class Modal extends React.Component {
 
 const primaryColor = '#D50000';
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 const Overlay = styled.div`
+  animation: ${fadeIn} 0.2s linear;
   display: block;
   // display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
