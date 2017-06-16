@@ -1,3 +1,4 @@
+// @flow
 const handleErrors = (response) => {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -5,7 +6,7 @@ const handleErrors = (response) => {
   return response;
 };
 
-export const get = (endpoint, param) =>
+export const get = (endpoint: string, param: string) =>
   fetch(`${endpoint}?search=${param}`)
     .then(handleErrors)
     .catch((error) => {
@@ -13,7 +14,7 @@ export const get = (endpoint, param) =>
       throw Error(error);
     });
 
-export const post = (endpoint, body) =>
+export const post = (endpoint: string, body: string) =>
   fetch(endpoint, { method: 'POST', body })
     .catch((error) => {
       throw Error(error);
