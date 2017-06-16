@@ -1,9 +1,19 @@
+// @flow
 import React from 'react';
 import { Dialog, RaisedButton, FlatButton, TextField } from 'material-ui';
 
 import ResponsiveContainer from './ResponsiveContainer';
 
-const BrandDialog = (props) => ResponsiveContainer({
+type Props = {
+  brand: string,
+  city: string,
+  onChangeCity: () => void,
+  open: boolean,
+  submit: () => void,
+  closeDialog: () => void,
+};
+
+const BrandDialog = (props: Props) => ResponsiveContainer({
   mobileComponent: <MobileBrandDialog { ...props } />,
   desktopComponent: <DesktopBrandDialog { ...props } />
 });

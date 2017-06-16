@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { CircularProgress, RaisedButton } from 'material-ui';
 
@@ -7,7 +8,7 @@ import styles from './styles';
 
 const { centerFlex } = styles;
 
-const ResultsContainer = ({ results, onClick }) => (
+const ResultsContainer = ({ results, onClick }: { results: { [string]: string }, onClick: (string) => void }) => (
   <div name="results" style={ centerFlex }>
     {
       results === LOADING_RESULTS
@@ -22,7 +23,7 @@ const ResultsContainer = ({ results, onClick }) => (
   </div>
 );
 
-export const ResultList = ({ results, onClick, style }) => (
+export const ResultList = ({ results, onClick, style }: { results: { [string]: string }, onClick: (string) => void, style: any }) => (
   <div style={ centerFlex }>
     {
       Object.keys(results).map(key => {
