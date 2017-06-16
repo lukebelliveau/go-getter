@@ -60,7 +60,7 @@ class SubmitBrand extends Component {
         open: false,
         message: '',
       }
-    }), toastDuration * 2)
+    }), toastDuration)
   }
 
   closeDialog() {

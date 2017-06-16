@@ -9,11 +9,11 @@ const BrandDialog = (props) => ResponsiveContainer({
   desktopComponent: <DesktopBrandDialog { ...props } />
 });
 
-// const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
-//   <Dialog open={ open } actions={ dialogButtons(FlatButton, submit, closeDialog, {}) } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
-//       <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
-//   </Dialog>
-// );
+const DesktopBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
+  <Dialog open={ open } actions={ dialogButtons(FlatButton, submit, closeDialog, {}) } onRequestClose={ closeDialog } id="brandDialog" title={ brand }>
+      <TextField floatingLabelText="City" value={ city || '' } onChange={ onChangeCity } style={{ margin: 20 }}/>
+  </Dialog>
+);
 
 const MobileBrandDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
   <Dialog open={ open } actions={ dialogButtons(RaisedButton, submit, closeDialog, mobileStyles) }
