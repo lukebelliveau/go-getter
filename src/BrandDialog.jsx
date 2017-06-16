@@ -32,7 +32,7 @@ class Modal extends React.Component {
         ?
         <Overlay onClick={ this.click } id="overlay">
             <Container>
-              <Header>A Header Brand</Header>
+              <Header>{ this.props.brand }</Header>
               <Body onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
               <Footer/>
             </Container>
@@ -54,21 +54,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const OverlayDesktop = styled.div`
-  animation: ${fadeIn} 0.2s linear;
-  display: block;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  // overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-`;
-
 const Overlay = styled.div`
   animation: ${fadeIn} 0.2s linear;
   display: block;
@@ -82,6 +67,9 @@ const Overlay = styled.div`
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  @media (min-device-width: 768px) {
+    padding-top: 100px;
+  }
 `;
 
 const Container = styled.div`
@@ -90,7 +78,7 @@ const Container = styled.div`
   margin: auto;
   padding: 0;
   width: 80%;
-  height: 50%;
+  height: 500px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -105,26 +93,45 @@ const Container = styled.div`
     height: 50%; 
     width: 1px;
   }
+  @media (min-device-width: 768px) {
+    width: 50%;
+    height: 300px;
+  }
 `;
+
 const HeaderContainer = styled.div`
-  padding: 2px 16px;
+  padding: 2px 20px;
   font-family: sans-serif;
   font-size: 40px;
   &:after {
     content:''; 
     width: 90%; 
+    padding-left: 20px;
     height:1px; 
     background: lightgray; 
     position:absolute; 
   }
+  @media (min-device-width: 768px) {
+    font-size: initial;
+  }
 `;
+const Header = ({ children }) => (
+  <HeaderContainer>
+    <h2>{ children }</h2>
+  </HeaderContainer>
+);
+
 const BodyContainer = styled.div`
   padding: 20px 16px 0px 16px;
   height: 40%;
+  @media (min-device-width: 768px) {
+    height: initial;
+  }
 `;
 const Input = styled.input`
   font-size: 40px;
   margin: 40px 25px;
+  margin-bottom: 0px;
   width: 90%;
   display: block;
   border: none;
@@ -145,8 +152,21 @@ const Input = styled.input`
     box-shadow: none;
     outline: none;
     font-size: 40px;
+    @media (min-device-width: 768px) {
+      background-position: 0 0;
+      font-size: 20px;
+    }
+  }
+  @media (min-device-width: 768px) {
+    font-size: initial;
+    width: 200px;
   }
 `;
+const Body = ({ onChange, children }) => (
+  <BodyContainer>
+    <Input placeholder="City" onChange={ onChange } value={ children } />
+  </BodyContainer>
+);
 
 const FooterContainer = styled.div`
   display: flex;
@@ -154,6 +174,10 @@ const FooterContainer = styled.div`
   padding: 2px 16px;
   color: white;
   width: 90%;
+  top: 0px;
+  @media (min-device-width: 768px) {
+    width: initial;
+  }
 `;
 const Button = styled.div`
   margin: 5px;
@@ -165,96 +189,8 @@ const Button = styled.div`
     background-color: #EEEEEE;
     cursor: pointer;
   }
-`;
-
-const ContainerDesktop = styled.div`
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  width: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s
-  &:after {
-    content:""; 
-    background: black; 
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    height: 50%; 
-    width: 1px;
-  }
-`;
-
-const HeaderContainerDesktop = styled.div`
-  padding: 2px 16px;
-  font-family: sans-serif;
-  &:after {
-    content:''; 
-    width: 90%; 
-    height:1px; 
-    background: lightgray; 
-    position:absolute; 
-  }
-`;
-const Header = ({ children }) => (
-  <HeaderContainer>
-    <h2>{ children }</h2>
-  </HeaderContainer>
-);
-
-const BodyContainerDesktop = styled.div`
-  padding: 20px 16px 0px 16px;
-`;
-
-const InputDesktop = styled.input`
-  margin: 40px 25px;
-  width: 200px;
-  display: block;
-  border: none;
-  padding: 10px 0;
-  border-bottom: solid 1px ${primaryColor};
-  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
-  background-position: -200px 0;
-  background-size: 200px 100%;
-  background-repeat: no-repeat;
-  color: #0e6252;
-  font-family: 'roboto', sans-serif;
-  -webkit-transition: all 0.3s ease-in-out;
-          transition: all 0.3s ease-in-out;
-  &:focus{
-    box-shadow: none;
-    outline: none;
-    background-position: 0 0;
-    font-size: 11px;
-  }
-`;
-const Body = ({ onChange, children }) => (
-  <BodyContainer>
-    <Input placeholder="City" onChange={ onChange } value={ children } />
-  </BodyContainer>
-);
-
-const FooterContainerDesktop = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 2px 16px;
-  color: white;
-`;
-const ButtonDesktop = styled.div`
-  margin: 5px;
-  padding: 10px;
-  color: ${props => props.color};
-  font-family: Roboto, sans-serif;
-  &:hover{
-    background-color: #EEEEEE;
-    cursor: pointer;
+  @media (min-device-width: 768px) {
+    font-size: initial;
   }
 `;
 const Footer = () => (
