@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -44,7 +45,7 @@ const Container = styled.div`
   z-index: 1;
 `;
 
-const Toast = ({ open, message }) => (
+const Toast = ({ open, message }: { open: boolean, message: string }) => (
   open
     ? <Container>
         <Content open={ open }>{ message }</Content>
