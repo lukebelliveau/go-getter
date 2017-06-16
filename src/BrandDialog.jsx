@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ResponsiveContainer from './ResponsiveContainer';
-
-const primaryColor = '#D50000';
-
 class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -12,29 +8,31 @@ class Modal extends React.Component {
     this.props = props;
 
     this.state = {
-      // show: this.props.show
-      show: true
+      show: this.props.show
     };
 
     this.click = this.click.bind(this);
   }
 
   click(event) {
-    let newState;
     switch(event.target.id) {
       case 'overlay':
-        newState = { show: false }
+        this.props.closeDialog();
+      case 'submit':
+        this.props.submit();
+        this.props.closeDialog();
+      case 'cancel':
+        this.props.closeDialog();
     }
-    this.setState(newState);
   }
 
   render() {
     return (
-      this.state.show
+      this.props.show
         ? <Overlay onClick={ this.click } id="overlay">
             <Container>
               <Header>{ this.props.brand }</Header>
-              <Body/>
+              <Body onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
               <Footer/>
             </Container>
         </Overlay>
@@ -43,6 +41,8 @@ class Modal extends React.Component {
     )
   }
 }
+
+const primaryColor = '#D50000';
 
 const Overlay = styled.div`
   display: block;
@@ -101,12 +101,7 @@ const Header = ({ children }) => (
 const BodyContainer = styled.div`
   padding: 20px 16px 0px 16px;
 `;
-// const Input = styled.input`
-//   width: 50%;
-//   font-size: 20px;
-//   height: 40px;
-//   border-style: groove;
-// `;
+
 const Input = styled.input`
   margin: 40px 25px;
   width: 200px;
@@ -132,9 +127,9 @@ const Input = styled.input`
     font-size: 11px;
   }
 `;
-const Body = () => (
+const Body = ({ onChange, children }) => (
   <BodyContainer>
-    <Input placeholder="City"/>
+    <Input placeholder="City" onChange={ onChange } value={ children } />
   </BodyContainer>
 );
 
@@ -154,25 +149,11 @@ const Button = styled.div`
     cursor: pointer;
   }
 `;
-
 const Footer = () => (
   <FooterContainer>
-    <Button color="gray">CANCEL</Button>
-    <Button color={ primaryColor }>SUBMIT</Button>
+    <Button color="gray" id="cancel">CANCEL</Button>
+    <Button color={ primaryColor } id="submit">SUBMIT</Button>
   </FooterContainer>
-);
-
-const ResponsiveDialog = ({ brand, city, onChangeCity, open, submit, closeDialog }) => (
-  open
-    ?
-  <Overlay>
-    <Container>
-      <Header>{ brand }</Header>
-      <Body/>
-      <Footer/>
-    </Container>
-  </Overlay>
-    : null
 );
 
 export default Modal;

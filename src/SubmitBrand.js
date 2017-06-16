@@ -77,7 +77,7 @@ class SubmitBrand extends Component {
       <div>
         <BrandDialog
           brand={ this.brand } city={ this.state.dialog.city }
-          onChangeCity={ this.changeCity } open={ this.show }
+          onChangeCity={ this.changeCity } show={ this.show }
           submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
         <Toast open={ this.state.toast.open } message={ this.state.toast.message } toastDuration={ toastDuration }/>
       </div>
