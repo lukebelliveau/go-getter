@@ -138,8 +138,8 @@ const ToastResponsive = styled.div`
 `;
 
 const ToastContainer = ({ open, message }) => (
-  <Toast open={ open }>{ 'Congrats! Youve been selected' }</Toast>
+  <Toast open={ open }>{ message }</Toast>
 );
 
-export default ToastContainer;
+export default Toast;
 
