@@ -75,32 +75,70 @@ const fadeOut = keyframes`
   }
 `;
 
-const Toast2 = styled.div`
+const ToastMobile = styled.div`
   // visibility: ${props => props.open ? 'visible' : 'hidden'};
   animation: ${props => props.open ? fadeIn : fadeOut} 1s linear;
-  // min-width: 250px;
   color: #FFFFFF;
   background-color: ${props => messageColor(props.children)};
   text-align: center;
   padding: 16px;
   z-index: 1;
-  font-size: 75px;
-  margin-top: 100px;
   font-family: sans-serif;
+  position: fixed;
+  
+  font-size: 75px;
+  margin-left: -10px;
+  bottom: 0;
+  margin-top: 100px;
 `;
 
-const Centerer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  position: fixed;
-  bottom: 0;
+const ToastDesktop = styled.div`
+    // visibility: ${props => props.open ? 'visible' : 'hidden'};
+    // animation: ${props => props.open ? fadeIn : fadeOut} 1s linear;
+    color: #FFFFFF;
+    background-color: ${props => messageColor(props.children)};
+    text-align: center;
+    padding: 16px;
+    z-index: 1;
+    font-family: sans-serif;
+    position: fixed;
+    
+    font-size: 17px;
+    margin-left: -125px;
+    bottom: 30px;
+    min-width: 250px;
+    border-radius: 2px;
+    left: 50%;
+`;
+
+const ToastResponsive = styled.div`
+    // visibility: ${props => props.open ? 'visible' : 'hidden'};
+    // animation: ${props => props.open ? fadeIn : fadeOut} 1s linear;
+    color: #FFFFFF;
+    background-color: ${props => messageColor(props.children)};
+    text-align: center;
+    padding: 16px;
+    z-index: 1;
+    font-family: sans-serif;
+    position: fixed;
+    
+    font-size: 75px;
+    margin-left: -10px;
+    bottom: 0;
+    margin-top: 100px;
+  
+    @media (min-width: 768px) {
+      font-size: 17px;
+      margin-left: -125px;
+      bottom: 30px;
+      min-width: 250px;
+      border-radius: 2px;
+      left: 50%;
+    }
 `;
 
 const ToastContainer = ({ open, message }) => (
-  <Centerer>
-    <Toast2 open={ open }>{ message }</Toast2>
-  </Centerer>
+  <Toast open={ open }>{ 'Congrats! Youve been selected' }</Toast>
 );
 
 export default ToastContainer;
