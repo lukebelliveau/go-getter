@@ -1,3 +1,4 @@
+// @flow
 const centerFlex = {
   display: 'flex',
   flexWrap: 'wrap',
