@@ -92,25 +92,15 @@ const Container = styled.div`
   margin: auto;
   padding: 0;
   width: 80%;
-  height: 600px;
+  height: auto;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s
-  &:after {
-    content:""; 
-    background: black; 
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    height: 50%; 
-    width: 1px;
-  }
   @media (min-device-width: ${mobileDeviceWidth}) {
     width: 50%;
-    height: 300px;
   }
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
 `;
 
 const HeaderContainer = styled.div`
@@ -150,6 +140,7 @@ const Body = ({ onChange, children }) => (
 
 const FooterContainer = styled.div`
   display: flex;
+  display: -ms-flexbox;
   justify-content: flex-end;
   padding: 2px 16px;
   color: white;
@@ -160,7 +151,7 @@ const FooterContainer = styled.div`
   }
 `;
 const Button = styled.div`
-  margin: 5px;
+  margin: 50px 0px 5% 5px;
   padding: 10px;
   color: ${props => props.color};
   font-family: Roboto, sans-serif;

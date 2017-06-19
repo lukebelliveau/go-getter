@@ -36,7 +36,7 @@ export default styled.div`
     content: '';
   }
   &:after {
-    background: #f5fffd;
+    background: #ffffff;
     width: 75%;
     height: 75%;
     border-radius: 50%;

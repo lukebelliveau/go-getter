@@ -43,7 +43,7 @@ const Input = styled.input`
   }
   @media (min-device-width: ${mobileDeviceWidth}) {
     font-size: initial;
-    width: 200px;
+    width: 50%;
   }
 `;
 
