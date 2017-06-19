@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import { CircularProgress } from 'material-ui';
 import styled from 'styled-components';
 
 import { LOADING_RESULTS } from './App';
 import styles from './styles';
+import LoadingSpinner from './LoadingSpinner';
 
 const { mobileDeviceWidth, primaryColor, hoverColor } = styles;
 
@@ -16,7 +16,8 @@ const ResultsContainer = ({ results, onClick }: props) => (
   <div name="results" style={ centerFlex }>
     {
       results === LOADING_RESULTS
-        ? <CircularProgress />
+        ?
+        <LoadingSpinner>Hey</LoadingSpinner>
         :  results
           ? <div id="searchResults" style={{ width: '100%' }}>
               <ResultList results={ results } onClick={ onClick } />
