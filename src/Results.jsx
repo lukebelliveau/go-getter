@@ -8,12 +8,12 @@ import LoadingSpinner from './LoadingSpinner';
 
 const { mobileDeviceWidth, primaryColor, hoverColor } = styles;
 
-const { centerFlex } = styles;
+const { CenterContainer } = styles;
 
 type props = { results: Object, onClick: (string) => void };
 
 const ResultsContainer = ({ results, onClick }: props) => (
-  <div name="results" style={ centerFlex }>
+  <CenterContainer>
     {
       results === LOADING_RESULTS
         ?
@@ -24,11 +24,11 @@ const ResultsContainer = ({ results, onClick }: props) => (
             </div>
           : null
     }
-  </div>
+  </CenterContainer>
 );
 
 export const ResultList = ({ results, onClick }: props) => (
-  <div style={ centerFlex }>
+  <CenterContainer>
     {
       results.length === 0
         ? <NoResults>Sorry, the search for brands returned no results. Please try a different search.</NoResults>
@@ -43,7 +43,7 @@ export const ResultList = ({ results, onClick }: props) => (
         )
       })
     }
-  </div>
+  </CenterContainer>
 );
 
 const NoResults = styled.div`

@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 import styles from './styles';
-const { centerFlex } = styles;
+const { CenterContainer } = styles;
 
 const { mobileDeviceWidth, primaryColor } = styles;
 
 const SearchBar = ({ value, onChange }) => (
-  <div style={ centerFlex }>
-    <Input onChange={ onChange } placeholder="Search for brands"/>
-  </div>
+    <CenterContainer>
+      <Input onChange={ onChange } placeholder="Search for brands"/>
+    </CenterContainer>
 );
 
 const Input = styled.input`
