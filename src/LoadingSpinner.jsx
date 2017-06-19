@@ -18,7 +18,7 @@ export default styled.div`
   background: -o-linear-gradient(left, ${primaryColor} 10%, rgba(213,0,0, 0) 42%);
   background: -ms-linear-gradient(left, ${primaryColor} 10%, rgba(213,0,0, 0) 42%);
   background: linear-gradient(to right, ${primaryColor} 10%, rgba(213,0,0, 0) 42%);
-  position: relative;
+  position: fixed;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
   -webkit-transform: translateZ(0);
