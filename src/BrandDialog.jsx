@@ -50,7 +50,7 @@ class Modal extends React.Component {
             <Container>
               <Header>{ this.props.brand }</Header>
               <Body onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
-              <Footer/>
+              <Footer clickable={ this.props.city.length > 0 }/>
             </Container>
         </Overlay>
         : null
@@ -200,17 +200,17 @@ const Button = styled.div`
   font-family: Roboto, sans-serif;
   font-size: 50px;
   &:hover{
-    background-color: #EEEEEE;
-    cursor: pointer;
+    background-color: ${props => props.clickable ? '#EEEEEE' : 'initial'};
+    cursor: ${props => props.clickable ? 'pointer' : 'default'};
   }
   @media (min-device-width: ${mobileDeviceWidth}) {
     font-size: initial;
   }
 `;
-const Footer = () => (
+const Footer = ({ clickable }) => (
   <FooterContainer>
-    <Button color="gray" id="cancel">CANCEL</Button>
-    <Button color={ primaryColor } id="submit">SUBMIT</Button>
+    <Button color="gray" id="cancel" clickable={ true }>CANCEL</Button>
+    <Button color={ clickable ? primaryColor : 'lightgray' } id={ clickable ? 'submit' : '' } clickable={ clickable }>SUBMIT</Button>
   </FooterContainer>
 );
 
