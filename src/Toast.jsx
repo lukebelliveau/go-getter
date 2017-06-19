@@ -46,10 +46,10 @@ const Container = styled.div`
   pointer-events: none;
 `;
 
-const Toast = ({ open, message }: { open: boolean, message: string }) => (
-  open
+const Toast = ({ show, message }: { show: boolean, message: string }) => (
+  show
     ? <Container>
-        <Content open={ open }>{ message }</Content>
+        <Content>{ message }</Content>
       </Container>
     : null
 );
