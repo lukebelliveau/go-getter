@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ResultsComponent from './Results';
 import SearchBar from './SearchBar';
 import SubmitBrand from './SubmitBrand';
-import { searchForBrands } from './api/apiHelper';
+import { searchForBrands } from './api';
 
 export const LOADING_RESULTS = 'loading_brand_results';
 

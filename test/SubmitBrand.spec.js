@@ -8,7 +8,7 @@ import { createWaitForElement } from 'enzyme-wait';
 
 import SubmitBrand from '../src/SubmitBrand';
 import Modal, { ids } from '../src/Modal';
-import apiHelper from '../src/api/apiHelper';
+import api from '../src/api';
 
 describe('SubmitBrand', () => {
   chai.use(chaiEnzyme());
@@ -44,7 +44,7 @@ describe('SubmitBrand', () => {
   describe('submitting a registration', () => {
     const city = 'New York';
     const responseMessage = 'Response Message';
-    const registerBrandInCity = sinon.stub(apiHelper, 'registerBrandInCity').resolves(responseMessage)
+    const registerBrandInCity = sinon.stub(api, 'registerBrandInCity').resolves(responseMessage)
     beforeEach(() => {
       const input = submitBrandComponent.find(`#input-city`)
       input.simulate('change', {target: {value: city}});

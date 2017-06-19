@@ -1,5 +1,3 @@
-import { get, post } from './apiClient';
-
 const url = 'https://us-central1-pinata-1470075080669.cloudfunctions.net';
 const brandEndpoint = `${url}/brands`;
 const cityEndpoint = `${url}/cities`;
@@ -20,13 +18,27 @@ const messages = {
 
 const capitalize = (string) => string.replace(/\b\w/g, l => l.toUpperCase());
 
+const handleErrors = (response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
+
 export const searchForBrands = brand =>
-  get(brandEndpoint, brand)
+  fetch(`${brandEndpoint}?search=${brand}`)
+    .then(handleErrors)
     .then(response => response.text())
-    .then(text => JSON.parse(text));
+    .then(text => JSON.parse(text))
+    .catch((error) => {
+      throw Error(error);
+    });
 
 const registerBrandInCity = (brand, city) =>
-  post(cityEndpoint, JSON.stringify({ brand, city }))
+  fetch(cityEndpoint, {
+    method: 'POST',
+    body: JSON.stringify({ brand, city })
+  })
     .then(response => toastMessage(response, brand, city))
     .catch(() => messages.error);
 

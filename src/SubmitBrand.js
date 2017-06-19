@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import update from 'immutability-helper';
 import Modal from './Modal';
 import Toast from './Toast';
-import apiHelper from './api/apiHelper'
-
+import api from './api'
 
 const toastDuration = 4000;
 
@@ -51,7 +50,7 @@ class SubmitBrand extends Component {
   }
 
   confirmBrand() {
-    apiHelper.registerBrandInCity(this.props.brand, this.state.dialog.city)
+    api.registerBrandInCity(this.props.brand, this.state.dialog.city)
       .then(message => {
         this.setState({
           toast: {
