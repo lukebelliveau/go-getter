@@ -27,7 +27,7 @@ export const ResultList = ({ results, onClick, style }) => (
   <div style={ centerFlex }>
     {
       results.length === 0
-        ? <div style={ style.noResults }>Sorry, the search for brands returned no results. Please try a different search.</div>
+        ? <NoResults>Sorry, the search for brands returned no results. Please try a different search.</NoResults>
         : Object.keys(results).map(key => {
         const brandName = results[key];
         return(
@@ -41,6 +41,16 @@ export const ResultList = ({ results, onClick, style }) => (
     }
   </div>
 );
+
+const NoResults = styled.div`
+  font-family: Roboto, sans-serif;
+  font-size: 50px;
+  text-align: center;
+  @media (min-device-width: ${mobileDeviceWidth}){
+    font-size: initial;
+    text-align: initial;
+  }
+`
 
 const Button = styled.div`
   background-color: ${ primaryColor };
