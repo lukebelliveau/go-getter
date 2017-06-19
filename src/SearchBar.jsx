@@ -1,45 +1,50 @@
 import React from 'react';
-import { TextField } from 'material-ui';
+import styled from 'styled-components';
 
 import styles from './styles';
 const { centerFlex } = styles;
 
-import ResponsiveContainer from './ResponsiveContainer';
+const { mobileDeviceWidth, primaryColor } = styles;
 
-const placeholder = 'Search for brands';
-
-const DesktopSearchBar = ({ value, onChange }) => (
+const SearchBar = ({ value, onChange }) => (
   <div style={ centerFlex }>
-    <TextField
-      value={ value }
-      onChange={ onChange }
-      floatingLabelText={ placeholder }
-    />
+    <Input onChange={ onChange } placeholder="Search for brands"/>
   </div>
 );
 
-const MobileSearchBar = ({ value, onChange }) => (
-  <div style={ centerFlex }>
-    <TextField
-      value={ value }
-      onChange={ onChange }
-      hintText={ placeholder }
-      style={{
-        width: '100%',
-        height: 200
-      }}
-      inputStyle={{
-        fontSize: 100,
-        textAlign: 'center'
-      }}
-      hintStyle={{
-        textAlign: 'center',
-      }}
-    />
-  </div>
-);
+const Input = styled.input`
+  font-size: 40px;
+  margin: 40px 25px;
+  margin-bottom: 0px;
+  width: 90%;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px ${primaryColor};
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, ${primaryColor} 4%);
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+  font-family: 'roboto', sans-serif;
+  -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+  &:focus{
+    box-shadow: none;
+    outline: none;
+    font-size: 40px;
+    @media (min-device-width: ${mobileDeviceWidth}) {
+      background-position: 0 0;
+      font-size: 20px;
+    }
+  }
+  @media (min-device-width: ${mobileDeviceWidth}) {
+    font-size: initial;
+    width: 200px;
+  }
+`;
 
-export default ({ value, onChange }) => ResponsiveContainer({
-  mobileComponent: <MobileSearchBar value={ value } onChange={ onChange } />,
-  desktopComponent: <DesktopSearchBar value={ value } onChange={ onChange } />
-});
+export default SearchBar;
