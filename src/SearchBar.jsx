@@ -7,7 +7,7 @@ const { CenterContainer, Input} = styles;
 
 const SearchBar = ({ value, onChange }: { value: string, onChange: (Event) => void }) => (
     <CenterContainer>
-      <Input onChange={ onChange } placeholder="Search for brands"/>
+      <Input onChange={ onChange } id="brand-search" placeholder="Search for brands"/>
     </CenterContainer>
 );
 
