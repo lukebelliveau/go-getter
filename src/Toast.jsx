@@ -3,7 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 //bad for maintainability -- need to figure out better place to hold messages
-const messageColor = (message) => (message.indexOf('Congrats') >= 0) ? '#388E3C' : '#D50000';
+const messageColor = (message) => (message.indexOf('Congrats') >= 0) ? '#388E3C' : '#A80A00';
 
 const fadeIn = keyframes`
   from {
@@ -43,6 +43,7 @@ const Container = styled.div`
   position: fixed;
   bottom: 0px;
   z-index: 1;
+  pointer-events: none;
 `;
 
 const Toast = ({ open, message }: { open: boolean, message: string }) => (
