@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,7 +7,7 @@ const { CenterContainer } = styles;
 
 const { mobileDeviceWidth, primaryColor } = styles;
 
-const SearchBar = ({ value, onChange }) => (
+const SearchBar = ({ value, onChange }: { value: string, onChange: (Event) => void }) => (
     <CenterContainer>
       <Input onChange={ onChange } placeholder="Search for brands"/>
     </CenterContainer>

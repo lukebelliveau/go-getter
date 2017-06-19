@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 
 import ResultsComponent from './Results';
@@ -26,16 +27,19 @@ const initialState = {
 };
 
 class App extends Component {
+  state = initialState;
+  changeBrandEntry: (Event) => void;
+  brandSelected: (string) => void;
+  closeDialog: () => void;
   constructor() {
     super();
-    this.state = initialState;
 
     this.changeBrandEntry = this.changeBrandEntry.bind(this);
     this.brandSelected = this.brandSelected.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
   }
 
-  changeBrandEntry(event) {
+  changeBrandEntry(event: Event & { target: HTMLInputElement }) {
     if (this.state.updateTimeout) clearTimeout(this.state.updateTimeout);
 
     const brandInput = event.target.value;
@@ -49,7 +53,7 @@ class App extends Component {
     }));
   }
 
-  updateResults(brandInput) {
+  updateResults(brandInput: string) {
     searchForBrands(brandInput)
       .then((brandResults) => {
         this.setState(() => ({
@@ -58,7 +62,7 @@ class App extends Component {
       });
   }
 
-  brandSelected(brand) {
+  brandSelected(brand: string) {
     this.setState(() => ({
       dialog: {
         show: true,

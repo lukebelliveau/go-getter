@@ -8,7 +8,6 @@ import { registerBrandInCity } from './api/apiHelper'
 const toastDuration = 4000;
 
 type Props = {
-  city: string,
   brand: string,
   show: boolean,
   closeDialog: () => void,
