@@ -1,10 +1,18 @@
 // @flow
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
 
 import styles from './styles/Modal.style';
 
-const { Input, mobileDeviceWidth, primaryColor } = styles;
+const {
+  Overlay,
+  Dialog,
+  Input,
+  HeaderContainer,
+  BodyContainer,
+  primaryColor,
+  FooterContainer,
+  Button,
+} = styles;
 
 type Props = {
   show: boolean,
@@ -13,6 +21,12 @@ type Props = {
   closeDialog: () => void,
   submit: () => void,
   onChangeCity: (Event) => void,
+}
+
+const ids = {
+  modal: 'modal',
+  submit: 'submit',
+  cancel: 'cancel',
 }
 
 class Modal extends React.Component {
@@ -29,14 +43,14 @@ class Modal extends React.Component {
 
   click = (event: MouseEvent & { target: HTMLDivElement }) => {
     switch(event.target.id) {
-      case 'overlay':
+      case ids.modal:
         this.props.closeDialog();
         break;
-      case 'submit':
+      case ids.submit:
         this.props.submit();
         this.props.closeDialog();
         break;
-      case 'cancel':
+      case ids.cancel:
         this.props.closeDialog();
         break;
     }
@@ -46,128 +60,34 @@ class Modal extends React.Component {
     return (
       this.props.show
         ?
-        <Overlay onClick={ this.click } id="modal">
-            <Container>
+        <Overlay onClick={ this.click } id={ ids.modal }>
+            <Dialog>
               <Header>{ this.props.brand }</Header>
-              <Body id="modal-body"onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
+              <Body id="modal-body" onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
               <Footer clickable={ this.props.city.length > 0 }/>
-            </Container>
+            </Dialog>
         </Overlay>
         : null
     )
   }
 }
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
-
-const Overlay = styled.div`
-  animation: ${fadeIn} 0.2s linear;
-  display: block;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 25%; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    padding-top: 100px;
-  }
-`;
-
-const Container = styled.div`
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  width: 80%;
-  height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    width: 50%;
-  }
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-`;
-
-const HeaderContainer = styled.div`
-  padding: 2px 20px;
-  font-family: sans-serif;
-  font-size: 40px;
-  &:after {
-    content:''; 
-    width: 90%; 
-    padding-left: 20px;
-    height:1px; 
-    background: lightgray; 
-    position:absolute; 
-  }
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    font-size: initial;
-  }
-`;
 const Header = ({ children }) => (
   <HeaderContainer>
     <h2 id="modal-header">{ children }</h2>
   </HeaderContainer>
 );
 
-const BodyContainer = styled.div`
-  padding: 20px 16px 0px 16px;
-  height: 40%;
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    height: initial;
-  }
-`;
 const Body = ({ onChange, children }) => (
   <BodyContainer>
     <Input id="input-city" placeholder="City" onChange={ onChange } value={ children } />
   </BodyContainer>
 );
 
-const FooterContainer = styled.div`
-  display: flex;
-  display: -ms-flexbox;
-  justify-content: flex-end;
-  padding: 2px 16px;
-  color: white;
-  width: 90%;
-  top: 0px;
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    width: initial;
-  }
-`;
-const Button = styled.div`
-  margin: 50px 0px 5% 5px;
-  padding: 10px;
-  color: ${props => props.color};
-  font-family: Roboto, sans-serif;
-  font-size: 50px;
-  &:hover{
-    background-color: ${props => props.clickable ? '#EEEEEE' : 'initial'};
-    cursor: ${props => props.clickable ? 'pointer' : 'default'};
-  }
-  @media (min-device-width: ${mobileDeviceWidth}) {
-    font-size: initial;
-  }
-`;
 const Footer = ({ clickable }) => (
   <FooterContainer>
-    <Button color="gray" id="cancel" clickable={ true }>CANCEL</Button>
-    <Button color={ clickable ? primaryColor : 'lightgray' } id={ clickable ? 'submit' : 'asdf' } clickable={ clickable }>SUBMIT</Button>
+    <Button color="gray" id={ ids.cancel } clickable={ true }>CANCEL</Button>
+    <Button color={ clickable ? primaryColor : 'lightgray' } id={ clickable ? ids.submit : '' } clickable={ clickable }>SUBMIT</Button>
   </FooterContainer>
 );
 
