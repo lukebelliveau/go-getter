@@ -12,7 +12,7 @@ type Props = {
   city: string,
   closeDialog: () => void,
   submit: () => void,
-  onChangeCity: () => void,
+  onChangeCity: (Event) => void,
 }
 
 class Modal extends React.Component {
