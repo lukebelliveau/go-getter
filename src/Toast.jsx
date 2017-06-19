@@ -1,56 +1,15 @@
 // @flow
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
 
-//bad for maintainability -- need to figure out better place to hold messages
+import styles from './styles/Toast.style';
+
 const messageColor = (message) => (message.indexOf('Congrats') >= 0) ? '#388E3C' : '#A80A00';
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-`;
-
-const Content = styled.div`
-    color: #FFFFFF;
-    background-color: ${props => messageColor(props.children)};
-    text-align: center;
-    padding: 16px;
-    font-family: sans-serif;
-    
-    font-size: 75px;
-    margin-left: -10px;
-    bottom: 0;
-    margin-top: 100px;
-    
-    @media (min-device-width: 768px) {
-      font-size: 17px;
-      margin-bottom: 30px;
-      min-width: 250px;
-      border-radius: 2px;
-    }
-`;
-
-const Container = styled.div`
-  animation: ${fadeIn} 0.2s linear;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: fixed;
-  bottom: 0px;
-  z-index: 1;
-  pointer-events: none;
-`;
-
+const { Container, Content } = styles;
 const Toast = ({ show, message }: { show: boolean, message: string }) => (
   show
-    ?
-    <Container id="toast">
-        <Content>{ message }</Content>
+    ? <Container id="toast">
+        <Content color={ messageColor(message) }>{ message }</Content>
       </Container>
     : null
 );

@@ -2,17 +2,9 @@ import styled, { keyframes } from 'styled-components';
 
 import shared from './shared';
 
-const { mobileDeviceWidth } = shared;
+const { mobileDeviceWidth, fadeIn } = shared;
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
 
-  to {
-    opacity: 1;
-  }
-`;
 
 const Overlay = styled.div`
   animation: ${fadeIn} 0.2s linear;

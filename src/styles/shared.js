@@ -1,5 +1,5 @@
 // @flow
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const mobileDeviceWidth = '480px';
 const primaryColor = '#D50000';
@@ -47,9 +47,20 @@ const Input = styled.input`
   }
 `;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
 export default {
   CenterContainer,
   Input,
+  fadeIn,
   mobileDeviceWidth,
   primaryColor,
   hoverColor,
