@@ -23,8 +23,8 @@ class Modal extends React.Component {
     };
   }
 
-  click = (event: MouseEvent & { currentTarget: HTMLDivElement }) => {
-    switch(event.currentTarget.id) {
+  click = (event: MouseEvent & { target: HTMLDivElement }) => {
+    switch(event.target.id) {
       case 'overlay':
         this.props.closeDialog();
         break;
