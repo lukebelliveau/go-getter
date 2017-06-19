@@ -6,7 +6,7 @@ import { LOADING_RESULTS } from './App';
 import ResponsiveContainer from './ResponsiveContainer';
 import styles from './styles';
 
-const { mobileDeviceWidth, primaryColor } = styles;
+const { mobileDeviceWidth, primaryColor, hoverColor } = styles;
 
 const { centerFlex } = styles;
 
@@ -18,7 +18,7 @@ const ResultsContainer = ({ results, onClick }) => (
         :  results
           ? <div id="searchResults" style={{ width: '100%' }}>
             {ResponsiveContainer({
-              mobileComponent: <ResultList results={ results } onClick={ onClick } style={ mobileStyle }/>,
+              mobileComponent: <ResultList results={ results } onClick={ onClick } />,
               desktopComponent: <ResultList results={ results } onClick={ onClick } style={ desktopStyle }/>
             })}
           </div>
@@ -68,37 +68,46 @@ export const ResultList = ({ results, onClick, style }) => (
   </div>
 );
 
+// const Button = styled.div`
+//   background-color: ${ primaryColor };
+//   margin: 10px;
+//   height: 125px;
+//   line-height: 125px;
+//   width: 100%;
+//   font-size: 50px;
+//   color: #FFFFFF;
+//   font-family: Roboto, sans-serif;
+//   text-align: center;
+// `
+
 const Button = styled.div`
   background-color: ${ primaryColor };
   margin: 10px;
   height: 125px;
-  line-height: 125px;
   width: 100%;
   font-size: 50px;
   color: #FFFFFF;
   font-family: Roboto, sans-serif;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &:hover{
+    background-color: ${hoverColor};
+    cursor: pointer;
+  }
+  
+  @media (min-device-width: ${mobileDeviceWidth}){
+    height: 250px;
+    width: 250px;
+    font-size: 25px;
+    line-height: initial;
+  }
 `
 
 const backgroundColor = '#FA9100';
 const fontColor = '#FFFFFF';
-const mobileStyle = {
-  // backgroundColor,
-  noResults: {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: 50,
-    textAlign: 'center',
-  },
-  // button: {
-  //   margin: 10,
-  //   height: 125,
-  //   width: '100%',
-  // },
-  brandName: {
-    fontSize: 50,
-    color: fontColor,
-  }
-};
 
 const desktopStyle = {
   backgroundColor,

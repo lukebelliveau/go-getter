@@ -9,9 +9,11 @@ const centerFlex = {
 const mobileDeviceWidth = '480px';
 
 const primaryColor = '#D50000';
+const hoverColor = '#A80A00';
 
 export default {
   centerFlex,
   mobileDeviceWidth,
-  primaryColor
+  primaryColor,
+  hoverColor,
 };
