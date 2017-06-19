@@ -1,8 +1,19 @@
+// @flow
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+type Props = {
+  show: boolean,
+  brand: string,
+  city: string,
+  closeDialog: () => void,
+  submit: () => void,
+  onChangeCity: () => void,
+}
+
 class Modal extends React.Component {
-  constructor(props) {
+  state: { show: boolean };
+  constructor(props: Props) {
     super(props);
 
     this.props = props;
@@ -10,19 +21,20 @@ class Modal extends React.Component {
     this.state = {
       show: this.props.show
     };
-
-    this.click = this.click.bind(this);
   }
 
-  click(event) {
-    switch(event.target.id) {
+  click = (event: MouseEvent & { currentTarget: HTMLDivElement }) => {
+    switch(event.currentTarget.id) {
       case 'overlay':
         this.props.closeDialog();
+        break;
       case 'submit':
         this.props.submit();
         this.props.closeDialog();
+        break;
       case 'cancel':
         this.props.closeDialog();
+        break;
     }
   }
 
