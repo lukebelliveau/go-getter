@@ -2,6 +2,10 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import styles from './styles';
+
+const { mobileDeviceWidth, primaryColor } = styles;
+
 type Props = {
   show: boolean,
   brand: string,
@@ -53,9 +57,6 @@ class Modal extends React.Component {
     )
   }
 }
-
-const primaryColor = '#D50000';
-const mobileDeviceWidth = '480px';
 
 const fadeIn = keyframes`
   from {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { CircularProgress, RaisedButton, Text } from 'material-ui';
+import styled from 'styled-components';
 
 import { LOADING_RESULTS } from './App';
 import ResponsiveContainer from './ResponsiveContainer';
@@ -45,6 +46,10 @@ export const ResultList = ({ results, onClick, style }) => (
     }
   </div>
 );
+
+const Button = styled.div`
+
+`
 
 const backgroundColor = '#FA9100';
 const fontColor = '#FFFFFF';
