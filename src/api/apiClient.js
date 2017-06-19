@@ -9,7 +9,6 @@ export const get = (endpoint, param) =>
   fetch(`${endpoint}?search=${param}`)
     .then(handleErrors)
     .catch((error) => {
-      console.log('get error');
       throw Error(error);
     });
 
