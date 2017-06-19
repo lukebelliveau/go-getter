@@ -6,6 +6,7 @@ import { shallow } from 'enzyme';
 import Toast from '../src/Toast';
 
 describe('Toast', () => {
+  chai.use(chaiEnzyme());
   it('should display message when show prop is true', () => {
     const message = "Congrats!";
     const toast = shallow(<Toast show={ true } message={ message } />);

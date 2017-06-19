@@ -48,7 +48,8 @@ const Container = styled.div`
 
 const Toast = ({ show, message }: { show: boolean, message: string }) => (
   show
-    ? <Container>
+    ?
+    <Container id="toast">
         <Content>{ message }</Content>
       </Container>
     : null

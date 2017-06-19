@@ -46,10 +46,10 @@ class Modal extends React.Component {
     return (
       this.props.show
         ?
-        <Overlay onClick={ this.click } id="overlay">
+        <Overlay onClick={ this.click } id="modal">
             <Container>
               <Header>{ this.props.brand }</Header>
-              <Body onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
+              <Body id="modal-body"onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
               <Footer clickable={ this.props.city.length > 0 }/>
             </Container>
         </Overlay>
@@ -121,7 +121,7 @@ const HeaderContainer = styled.div`
 `;
 const Header = ({ children }) => (
   <HeaderContainer>
-    <h2>{ children }</h2>
+    <h2 id="modal-header">{ children }</h2>
   </HeaderContainer>
 );
 
@@ -134,7 +134,7 @@ const BodyContainer = styled.div`
 `;
 const Body = ({ onChange, children }) => (
   <BodyContainer>
-    <Input placeholder="City" onChange={ onChange } value={ children } />
+    <Input id="input-city" placeholder="City" onChange={ onChange } value={ children } />
   </BodyContainer>
 );
 
@@ -167,7 +167,7 @@ const Button = styled.div`
 const Footer = ({ clickable }) => (
   <FooterContainer>
     <Button color="gray" id="cancel" clickable={ true }>CANCEL</Button>
-    <Button color={ clickable ? primaryColor : 'lightgray' } id={ clickable ? 'submit' : '' } clickable={ clickable }>SUBMIT</Button>
+    <Button color={ clickable ? primaryColor : 'lightgray' } id={ clickable ? 'submit' : 'asdf' } clickable={ clickable }>SUBMIT</Button>
   </FooterContainer>
 );
 

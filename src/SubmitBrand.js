@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import update from 'immutability-helper';
-import BrandDialog from './BrandDialog';
+import Modal from './Modal';
 import Toast from './Toast';
-import { registerBrandInCity } from './api/apiHelper'
+import apiHelper from './api/apiHelper'
+
 
 const toastDuration = 4000;
 
@@ -50,7 +51,7 @@ class SubmitBrand extends Component {
   }
 
   confirmBrand() {
-    registerBrandInCity(this.props.brand, this.state.dialog.city)
+    apiHelper.registerBrandInCity(this.props.brand, this.state.dialog.city)
       .then(message => {
         this.setState({
           toast: {
@@ -81,11 +82,11 @@ class SubmitBrand extends Component {
   render() {
     return (
       <div>
-        <BrandDialog
+        <Modal id="modal"
           brand={ this.props.brand } city={ this.state.dialog.city }
           onChangeCity={ this.changeCity } show={ this.props.show }
           submit={ this.confirmBrand } closeDialog={ this.closeDialog }/>
-        <Toast show={ this.state.toast.open } message={ this.state.toast.message } />
+        <Toast id="toast" show={ this.state.toast.open } message={ this.state.toast.message } />
       </div>
     )
   }

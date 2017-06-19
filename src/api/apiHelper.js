@@ -25,7 +25,7 @@ export const searchForBrands = brand =>
     .then(response => response.text())
     .then(text => JSON.parse(text));
 
-export const registerBrandInCity = (brand, city) =>
+const registerBrandInCity = (brand, city) =>
   post(cityEndpoint, JSON.stringify({ brand, city }))
     .then(response => toastMessage(response, brand, city))
     .catch(() => messages.error);
@@ -36,3 +36,7 @@ const toastMessage = (response, brand, city) =>
       if (response === serverResponses.SUCCESS) return messages.success(brand, city);
       else if (response === serverResponses.NOT_OFFERED) return messages.notOffered(brand, city);
     });
+
+export default {
+  registerBrandInCity,
+}
