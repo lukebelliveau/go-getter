@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import ResultsComponent from './Results';
 import SearchBar from './SearchBar';
@@ -79,13 +78,11 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
-        <div>
-          <SearchBar value={ this.state.brandInput } onChange={ this.changeBrandEntry } />
-          <ResultsComponent results={ this.state.results } onClick={ this.brandSelected }/>
-          <SubmitBrand show={ this.state.dialog.show } brand={ this.state.dialog.brand } closeDialog={ this.closeDialog }/>
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <SearchBar value={ this.state.brandInput } onChange={ this.changeBrandEntry } />
+        <ResultsComponent results={ this.state.results } onClick={ this.brandSelected }/>
+        <SubmitBrand show={ this.state.dialog.show } brand={ this.state.dialog.brand } closeDialog={ this.closeDialog }/>
+      </div>
     );
   }
 }
