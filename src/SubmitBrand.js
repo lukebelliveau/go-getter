@@ -22,6 +22,7 @@ const initialState = {
     message: '',
   },
 };
+
 class SubmitBrand extends Component {
   state = initialState;
   closeParentDialog: () => void;
@@ -57,16 +58,18 @@ class SubmitBrand extends Component {
             open: true,
             message: message,
           }
-        })
+        }, this.closeToastAfterTimeout(toastDuration))
       });
     this.closeDialog();
+  }
 
+  closeToastAfterTimeout(timeout: number) {
     setTimeout(() => this.setState({
       toast: {
         open: false,
         message: '',
       }
-    }), toastDuration)
+    }), timeout)
   }
 
   closeDialog() {

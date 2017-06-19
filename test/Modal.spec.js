@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import Modal from '../src/Modal';
+import Modal, { ids } from '../src/Modal';
 
 const props = {
   brand: 'a brand',
@@ -15,7 +15,7 @@ const props = {
   closeDialog: sinon.spy(),
 };
 
-describe('BrandDialog', () => {
+describe('Modal', () => {
   chai.use(chaiEnzyme());
   chai.use(sinonChai);
 
@@ -37,14 +37,14 @@ describe('BrandDialog', () => {
   describe('click handlers', () => {
     describe('overlay', () => {
       it('calls closeDialog() callback', () => {
-        modal.simulate('click', {target: {id: 'overlay'}});
+        modal.simulate('click', {target: {id: ids.modal}});
         expect(props.closeDialog).to.have.been.called;
       });
     });
 
     describe('cancel button', () => {
       it('calls closeDialog() callback', () => {
-        modal.simulate('click', {target: {id: 'cancel'}});
+        modal.simulate('click', {target: {id: ids.cancel}});
 
         expect(props.closeDialog).to.have.been.called;
       });
@@ -52,7 +52,7 @@ describe('BrandDialog', () => {
     
     describe('submit button', () => {
       it('calls submit() and closeDialog() callbacks when submit button clicked', () => {
-        modal.simulate('click', {target: {id: 'submit'}});
+        modal.simulate('click', {target: {id: ids.submit}});
 
         expect(props.submit).to.have.been.called;
         expect(props.closeDialog).to.have.been.called;

@@ -23,8 +23,8 @@ type Props = {
   onChangeCity: (Event) => void,
 }
 
-const ids = {
-  modal: 'modal',
+export const ids = {
+  modal: 'overlay',
   submit: 'submit',
   cancel: 'cancel',
 }
@@ -59,14 +59,13 @@ class Modal extends React.Component {
   render() {
     return (
       this.props.show
-        ?
-        <Overlay onClick={ this.click } id={ ids.modal }>
-            <Dialog>
-              <Header>{ this.props.brand }</Header>
-              <Body id="modal-body" onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
-              <Footer clickable={ this.props.city.length > 0 }/>
-            </Dialog>
-        </Overlay>
+        ? <Overlay onClick={ this.click } id={ ids.modal }>
+              <Dialog>
+                <Header>{ this.props.brand }</Header>
+                <Body id="modal-body" onChange={ this.props.onChangeCity }>{ this.props.city }</Body>
+                <Footer clickable={ this.props.city.length > 0 }/>
+              </Dialog>
+          </Overlay>
         : null
     )
   }
