@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { CircularProgress } from 'material-ui';
 import styled from 'styled-components';
@@ -9,7 +10,9 @@ const { mobileDeviceWidth, primaryColor, hoverColor } = styles;
 
 const { centerFlex } = styles;
 
-const ResultsContainer = ({ results, onClick }) => (
+type props = { results: Object, onClick: (string) => void };
+
+const ResultsContainer = ({ results, onClick }: props) => (
   <div name="results" style={ centerFlex }>
     {
       results === LOADING_RESULTS
@@ -23,7 +26,7 @@ const ResultsContainer = ({ results, onClick }) => (
   </div>
 );
 
-export const ResultList = ({ results, onClick, style }) => (
+export const ResultList = ({ results, onClick }: props) => (
   <div style={ centerFlex }>
     {
       results.length === 0
