@@ -55,6 +55,7 @@ class Modal extends React.Component {
 }
 
 const primaryColor = '#D50000';
+const mobileDeviceWidth = '480px';
 
 const fadeIn = keyframes`
   from {
@@ -79,7 +80,7 @@ const Overlay = styled.div`
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     padding-top: 100px;
   }
 `;
@@ -105,7 +106,7 @@ const Container = styled.div`
     height: 50%; 
     width: 1px;
   }
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     width: 50%;
     height: 300px;
   }
@@ -123,7 +124,7 @@ const HeaderContainer = styled.div`
     background: lightgray; 
     position:absolute; 
   }
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     font-size: initial;
   }
 `;
@@ -136,7 +137,7 @@ const Header = ({ children }) => (
 const BodyContainer = styled.div`
   padding: 20px 16px 0px 16px;
   height: 40%;
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     height: initial;
   }
 `;
@@ -164,12 +165,12 @@ const Input = styled.input`
     box-shadow: none;
     outline: none;
     font-size: 40px;
-    @media (min-device-width: 768px) {
+    @media (min-device-width: ${mobileDeviceWidth}) {
       background-position: 0 0;
       font-size: 20px;
     }
   }
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     font-size: initial;
     width: 200px;
   }
@@ -187,7 +188,7 @@ const FooterContainer = styled.div`
   color: white;
   width: 90%;
   top: 0px;
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     width: initial;
   }
 `;
@@ -201,7 +202,7 @@ const Button = styled.div`
     background-color: #EEEEEE;
     cursor: pointer;
   }
-  @media (min-device-width: 768px) {
+  @media (min-device-width: ${mobileDeviceWidth}) {
     font-size: initial;
   }
 `;
