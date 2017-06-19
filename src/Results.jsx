@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { LOADING_RESULTS } from './App';
-import styles from './styles';
+import styles from './styles/Results.style';
 import LoadingSpinner from './LoadingSpinner';
 
 const { mobileDeviceWidth, primaryColor, hoverColor } = styles;
